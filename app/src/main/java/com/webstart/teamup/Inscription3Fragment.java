@@ -61,4 +61,8 @@ public class Inscription3Fragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_inscription3, container, false);
     }
+
+    public void addGame(View view) {
+        //ajouter le jeu à la liste de l'utilisateur et vider l'EditText
+    }
 }
