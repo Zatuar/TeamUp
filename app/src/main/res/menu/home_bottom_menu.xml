@@ -20,8 +20,4 @@
         android:id="@+id/shop"
         android:title="Boutique"
         android:icon="@drawable/logo"/>
-    <item
-        android:id="@+id/profil"
-        android:title="Profil"
-        android:icon="@drawable/logo"/>
 </menu>
