@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/swipe"
-        android:title="Recherche"
-        android:icon="@drawable/logo"/>
-    <item
         android:id="@+id/teams"
-        android:title="Équipes"
-        android:icon="@drawable/logo"/>
+        android:title="@string/nav_teams"
+        android:icon="@drawable/ic_baseline_people_24" />
     <item
-        android:id="@+id/tournament"
-        android:title="Tournois"
-        android:icon="@drawable/logo"/>
+        android:id="@+id/tournaments"
+        android:title="@string/nav_tournaments"
+        android:icon="@drawable/trophy" />
     <item
-        android:id="@+id/chat"
-        android:title="Chat"
-        android:icon="@drawable/logo"/>
+        android:id="@+id/chats"
+        android:title="@string/nav_team_chat"
+        android:icon="@drawable/ic_baseline_chat_24" />
+    <item
+        android:id="@+id/announces"
+        android:title="@string/nav_announces"
+        android:icon="@drawable/ic_baseline_dehaze_24" />
     <item
         android:id="@+id/shop"
-        android:title="Boutique"
-        android:icon="@drawable/logo"/>
+        android:title="@string/nav_shop"
+        android:icon="@drawable/ic_baseline_shop_24" />
 </menu>
