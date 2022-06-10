@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConnexionActivity"
-    android:background="@color/light_purple">
+    android:background="@color/light_purple" >
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="115dp"
-        android:layout_height="102dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:contentDescription="@string/logo_alt"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/logo_alt" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name"
@@ -83,9 +83,9 @@
         android:fontFamily="@font/sora"
         android:text="@string/forgot_password"
         android:textColor="@color/light_orange"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_password"/>
+        app:layout_constraintTop_toBottomOf="@id/edit_password" />
 
     <Button
         android:id="@+id/connexionValidation"
@@ -113,8 +113,7 @@
             android:layout_width="120dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="?android:attr/listDivider"
-            android:backgroundTint="@color/white" />
+            android:background="@color/white" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,8 +126,7 @@
             android:layout_width="120dp"
             android:layout_height="1dp"
             android:layout_gravity="center"
-            android:background="?android:attr/listDivider"
-            android:backgroundTint="@color/white" />
+            android:background="@color/white" />
     </LinearLayout>
 
     <Button
@@ -155,7 +153,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@string/no_account"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,7 +162,8 @@
             android:textColor="@color/light_orange"
             android:text="@string/sign_up"
             android:onClick="goToSignUp"
-            android:layout_marginStart="6dp"/>
+            android:layout_marginStart="6dp"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
