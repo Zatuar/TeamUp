@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">TeamUp</string>
+    <string name="logo_alt">TeamUp logo</string>
+    <string name="login">Se connecter</string>
+    <string name="mail_placeholder">Adresse email</string>
+    <string name="password_placeholder">Mot de passe</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="connect_with_google">Se connecter avec Google</string>
+    <string name="no_account">Pas de compte ?</string>
+    <string name="sign_up">Inscrivez-vous</string>
     <string name="nav_teams">Équipes</string>
     <string name="nav_tournaments">Tournois</string>
     <string name="nav_team_chat">Chat</string>
