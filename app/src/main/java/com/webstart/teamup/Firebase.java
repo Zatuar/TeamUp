@@ -56,6 +56,26 @@ public class Firebase extends AppCompatActivity {
         return result[0];
     }
     public Boolean signUp(String e, String pw, Context ct){
-        return true;
+        final Boolean[] result = {false};
+        mAuth.createUserWithEmailAndPassword(e, pw)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("SUCESS", "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                            result[0]=true;
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("SUCESS", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(ct, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+                    }
+                });
+        return result[0];
     }
 }
