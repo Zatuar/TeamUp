@@ -17,6 +17,8 @@ public class Firebase extends AppCompatActivity {
     FirebaseUser user;
 
     private FirebaseAuth mAuth;
+    private static final Firebase FB = new Firebase();
+
     public FirebaseUser getUser() {
         return user;
     }
@@ -27,7 +29,6 @@ public class Firebase extends AppCompatActivity {
     public static Firebase getInstance(){
         return  FB;
     }
-    private static final Firebase FB = new Firebase();
     private Firebase() {
         mAuth = FirebaseAuth.getInstance();
     }
@@ -41,8 +42,9 @@ public class Firebase extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Success", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            user.reload();
                             result[0] =true;
                         } else {
                             // If sign in fails, display a message to the user.
