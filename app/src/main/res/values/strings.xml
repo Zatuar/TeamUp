@@ -23,4 +23,6 @@
     <string name="nav_team_chat">Chat</string>
     <string name="nav_shop">Boutique</string>
     <string name="nav_announces">Annonces</string>
+    <string name="my_teams">Mes équipes</string>
+    <string name="ranking">Ranking</string>
 </resources>
