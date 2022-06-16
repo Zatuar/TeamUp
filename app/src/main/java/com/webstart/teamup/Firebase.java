@@ -44,7 +44,7 @@ public class Firebase extends AppCompatActivity {
                             Log.d("Success", "signInWithEmail:success");
                             user = mAuth.getCurrentUser();
                             //updateUI(user);
-                            user.reload();
+                            //user.reload();
                             result[0] =true;
                         } else {
                             // If sign in fails, display a message to the user.
