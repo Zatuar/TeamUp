@@ -65,4 +65,6 @@ public class TeamsListFragment extends Fragment {
         startActivity(selectedTeam);
     }
 
+    public void createTeamForm(View view) {
+    }
 }

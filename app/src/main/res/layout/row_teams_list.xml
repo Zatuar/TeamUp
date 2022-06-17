@@ -3,46 +3,163 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:id="@+id/team_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/dark_purple"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="15dp">
 
         <TextView
             android:id="@+id/team_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="1"/>
+            android:layout_marginRight="10dp"
+            android:gravity="end"
+            android:text="#1"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/team_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/logo" />
+
         <TextView
             android:id="@+id/team_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Team A"/>
+            android:text="Lorem ipsum"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/team_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="300 points"/>
+            android:layout_marginLeft="10dp"
+            android:text="364 points"
+            android:textColor="#808080"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/team_game"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/rocket_league" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/team_members_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_black"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/team_header">
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
+            android:id="@+id/team_members"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:background="@color/medium_purple"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="15dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/team_members"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:id="@+id/member_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/pp_1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_face_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pp_1"
+                    android:text="Member #1"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/member_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:id="@+id/pp_2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_face_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pp_2"
+                    android:text="Member #2"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/member_23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp">
+
+                <ImageView
+                    android:id="@+id/pp_23"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/ic_baseline_face_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pp_23"
+                    android:text="Member #3"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
+<!--  Recycler view for team members  -->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/team_members_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/team_header">-->
+
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content" >-->
+
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/team_members"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content" />-->
+<!--        </androidx.cardview.widget.CardView>-->
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

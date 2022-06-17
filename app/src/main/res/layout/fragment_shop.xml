@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ShopFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +14,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Boutique" />
+            android:text="@string/shop"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:paddingVertical="14dp"
+            android:onClick="goToSponsored"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -22,7 +27,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Abonnements" />
+            android:text="@string/subscription"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:paddingVertical="14dp"
+            android:onClick="goToSubscriptions"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -31,7 +40,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Options" />
+            android:text="@string/features"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:paddingVertical="14dp"
+            android:onClick="goToFeatures"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -40,20 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="Supporter" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Divers" />
+            android:text="@string/others"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:paddingVertical="14dp"
+            android:onClick="goToOthers"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
     </LinearLayout>
-
 </FrameLayout>

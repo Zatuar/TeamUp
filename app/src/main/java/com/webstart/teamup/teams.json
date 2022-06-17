@@ -5,6 +5,7 @@
       "name" : "Team A",
       "rank" : 1,
       "score" : 1000,
+      "logo" : "logo_url",
       "members" : [
         {
           "id" : 1,
@@ -21,7 +22,11 @@
           "name" : "Team member #2",
           "profile_picture" : "url"
         }
-      ]
+      ],
+      "game" : {
+        "id" : 1,
+        "logo" : "logo_url"
+      }
     }
   ]
 }

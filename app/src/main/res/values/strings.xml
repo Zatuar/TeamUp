@@ -25,4 +25,8 @@
     <string name="nav_announces">Annonces</string>
     <string name="my_teams">Mes équipes</string>
     <string name="ranking">Ranking</string>
+    <string name="shop">Boutique</string>
+    <string name="subscription">Abonnements</string>
+    <string name="features">Fonctionnalitées</string>
+    <string name="others">Divers</string>
 </resources>

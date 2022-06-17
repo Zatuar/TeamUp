@@ -22,7 +22,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.announces:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content, new SwipeFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content, new AnnouncementFragment()).commit();
                         return true;
 
                     case R.id.teams:

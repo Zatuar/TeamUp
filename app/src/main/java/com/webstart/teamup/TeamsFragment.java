@@ -39,4 +39,10 @@ public class TeamsFragment extends Fragment {
         teams.getData();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.team_content, teams).commit();
     }
+
+    public void listRanking(View view) {
+    }
+
+    public void listMyTeams(View view) {
+    }
 }
