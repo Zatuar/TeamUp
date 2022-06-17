@@ -2,6 +2,7 @@ package com.webstart.teamup;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -47,4 +48,6 @@ public class HomeActivity extends AppCompatActivity {
         menu.setSelectedItemId(R.id.teams);
     }
 
+    public void goToProfile(View view) {
+    }
 }

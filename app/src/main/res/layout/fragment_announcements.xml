@@ -19,7 +19,8 @@
             android:background="@color/purple"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
-            android:paddingHorizontal="15dp">
+            android:paddingHorizontal="15dp"
+            android:onClick="seeAnnouncement">
 
             <RelativeLayout
                 android:id="@+id/annonce_1"

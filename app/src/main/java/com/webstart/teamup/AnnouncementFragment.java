@@ -70,4 +70,7 @@ public class AnnouncementFragment extends Fragment {
         //pop-up pour ecrire un message
         //envoyer une notification à l'autre joueur
     }
+
+    public void seeAnnouncement(View view) {
+    }
 }
