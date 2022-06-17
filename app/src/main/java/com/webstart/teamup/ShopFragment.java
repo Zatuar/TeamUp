@@ -61,4 +61,16 @@ public class ShopFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shop, container, false);
     }
+
+    public void goToSponsored(View view) {
+    }
+
+    public void goToSubscriptions(View view) {
+    }
+
+    public void goToFeatures(View view) {
+    }
+
+    public void goToOthers(View view) {
+    }
 }
