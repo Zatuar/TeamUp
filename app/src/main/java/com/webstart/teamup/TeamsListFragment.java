@@ -17,7 +17,6 @@ import java.util.ArrayList;
 
 public class TeamsListFragment extends Fragment {
     ArrayList<Structure_Team> teams = new ArrayList<>();
-    private RecyclerView TeamsRV;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,17 +26,17 @@ public class TeamsListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teams_list, container, false);
-        TeamsRV = view.findViewById(R.id.rv_tl);
-        TeamsRV.setHasFixedSize(true);
+        RecyclerView teamsRV = view.findViewById(R.id.rv_tl);
+        teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
-        TeamsRV.setLayoutManager(manager);
-        RecyclerView.Adapter adapter = new TeamAdapter(teams,new ClickTeamListenner(){
+        teamsRV.setLayoutManager(manager);
+        RecyclerView.Adapter<TeamAdapter.Holder> adapter = new TeamAdapter(teams,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Structure_Team team){
                 selectedTeam(team);
             }
         },getContext());
-        TeamsRV.setAdapter(adapter);
+        teamsRV.setAdapter(adapter);
 
         return view;
     }
@@ -63,6 +62,7 @@ public class TeamsListFragment extends Fragment {
 
     private void selectedTeam(Structure_Team team) {
         Intent selectedTeam = new Intent(getContext(),TeamActivity.class);
+        startActivity(selectedTeam);
     }
 
 }

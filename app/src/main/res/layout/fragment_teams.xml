@@ -212,11 +212,11 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-    <FrameLayout
+        <FrameLayout
             android:id="@+id/team_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </FrameLayout>
+    </LinearLayout>
+
 </FrameLayout>

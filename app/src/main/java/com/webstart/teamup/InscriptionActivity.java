@@ -11,6 +11,7 @@ import android.view.View;
 public class InscriptionActivity extends AppCompatActivity {
     FragmentManager manager;
     FragmentTransaction transaction;
+    static Structure_Profil profil = new Structure_Profil();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

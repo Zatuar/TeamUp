@@ -1,6 +1,8 @@
 package com.webstart.teamup;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,10 +15,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.concurrent.Executor;
+
 public class Firebase extends AppCompatActivity {
     FirebaseUser user;
+    boolean result= true;
 
-    private FirebaseAuth mAuth;
+    private final FirebaseAuth mAuth;
     private static final Firebase FB = new Firebase();
 
     public FirebaseUser getUser() {
@@ -33,29 +38,28 @@ public class Firebase extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public Boolean signIn(String e, String pw, Context ct) {
-        final Boolean[] result = {false};
+    public boolean signIn(String e, String pw, Context ct) {
         mAuth.signInWithEmailAndPassword(e, pw)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("Success", "signInWithEmail:success");
                             user = mAuth.getCurrentUser();
                             //updateUI(user);
                             //user.reload();
-                            result[0] =true;
+                            result = true;
+                            Log.d("Success", "signInWithEmail:success");
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Error", "signInWithEmail:failure", task.getException());
                             Toast.makeText(ct, "Wrong email or password",
                                     Toast.LENGTH_SHORT).show();
+                            result =false;
                             //updateUI(null);
                         }
                     }
                 });
-        return result[0];
+        return result;
     }
     public Boolean signUp(String e, String pw, Context ct){
         final Boolean[] result = {false};
