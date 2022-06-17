@@ -8,17 +8,19 @@ public class Structure_Team {
     private Integer score;
     private Integer rank;
     private ArrayList<Structure_Profil_Min> members;
+    private Structure_Jeu game;
 
     public Structure_Team() {
     }
 
-    public Structure_Team(String name, String logo, Integer id, Integer score, ArrayList<Structure_Profil_Min> members, Integer rank) {
+    public Structure_Team(String name, String logo, Integer id, Integer score, ArrayList<Structure_Profil_Min> members, Integer rank, Structure_Jeu game) {
         this.name = name;
         this.logo = logo;
         this.id = id;
         this.score = score;
         this.members = members;
         this.rank = rank;
+        this.game = game;
     }
 
     public String getName() {
@@ -69,4 +71,11 @@ public class Structure_Team {
         this.rank = rank;
     }
 
+    public Structure_Jeu getGame() {
+        return game;
+    }
+
+    public void setGame(Structure_Jeu game) {
+        this.game = game;
+    }
 }

@@ -22,6 +22,7 @@ public class TeamsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,10 +50,11 @@ public class TeamsListFragment extends Fragment {
     void getData() {
         //appelle API
         ArrayList<Structure_Profil_Min> members = new ArrayList<>();
+        Structure_Jeu game = new Structure_Jeu("Jeu 1", "url", 1);;
         for (int i = 0; i < 5; i++) {
             members.add(new Structure_Profil_Min("Member "+i, "photo_url", i));
         }
-        teams.add(new Structure_Team("Team A", "url_logo", 1, 1000, members, 1));
+        teams.add(new Structure_Team("Team A", "url_logo", 1, 1000, members, 1, game));
         showTeams(teams);
     }
 

@@ -23,7 +23,9 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.announces:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content, new AnnouncementFragment()).commit();
+                        AnnouncementFragment announcementFragment = new AnnouncementFragment();
+                        announcementFragment.getData();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content, announcementFragment).commit();
                         return true;
 
                     case R.id.teams:
@@ -45,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        menu.setSelectedItemId(R.id.teams);
+        menu.setSelectedItemId(R.id.announces);
     }
 
     public void goToProfile(View view) {

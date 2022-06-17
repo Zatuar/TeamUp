@@ -8,59 +8,9 @@
     android:paddingVertical="10dp"
     android:paddingHorizontal="15dp" >
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/announces_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/purple"
-            android:orientation="horizontal"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="15dp"
-            android:onClick="seeAnnouncement">
-
-            <RelativeLayout
-                android:id="@+id/annonce_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/annonce_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Titre"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="24dp" />
-                <LinearLayout
-                    android:id="@+id/annonce_team"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/annonce_title">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Team #1"
-                        android:textColor="@color/white"
-                        android:textSize="20dp"
-                        android:textStyle="bold"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/rocket_league"
-                        android:layout_marginLeft="10dp"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/annonce_team"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis lectus dui. Sed suscipit orci nulla, vitae dignissim purus pretium a. Mauris enim tellus, ultricies ut blandit ac, mollis eget odio."
-                    android:textColor="@color/white" />
-            </RelativeLayout>
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

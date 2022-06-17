@@ -1,0 +1,30 @@
+{
+  "data" : [
+    {
+      "id" : 1,
+      "title" : "Annonce #1",
+      "body" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis lectus dui. Sed suscipit orci nulla, vitae dignissim purus pretium a. Mauris enim tellus, ultricies ut blandit ac, mollis eget odio.",
+      "team" : {
+        "id" : 1,
+        "name" : "Team #1",
+        "game" : {
+          "id" : 1,
+          "logo" : "url"
+        }
+      }
+    },
+    {
+      "id" : 2,
+      "title" : "Annonce #2",
+      "body" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis lectus dui. Sed suscipit orci nulla, vitae dignissim purus pretium a. Mauris enim tellus, ultricies ut blandit ac, mollis eget odio.",
+      "team" : {
+        "id" : 2,
+        "name" : "Team #2",
+        "game" : {
+          "id" : 2,
+          "logo" : "url"
+        }
+      }
+    }
+  ]
+}
