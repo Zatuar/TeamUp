@@ -23,13 +23,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/right_bottom_border_white"
+                android:background="@drawable/bottom_border_light_orange"
                 android:paddingLeft="5dp"
                 android:text="@string/my_teams"
-                android:textColor="@color/light_orange"
+                android:textColor="@color/white"
                 android:textSize="24dp"
                 android:paddingVertical="6dp"
-                android:backgroundTint="@color/medium_purple"/>
+                android:onClick="listMyTeams"/>
 
             <TextView
                 android:id="@+id/ranking"
@@ -37,14 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/left_bottom_border_white"
+                android:background="@drawable/bottom_border_white"
                 android:paddingLeft="10dp"
                 android:text="@string/ranking"
-                android:textColor="@color/white"
+                android:textColor="@color/gray"
                 android:textSize="24dp"
-                android:paddingVertical="6dp"/>
+                android:paddingVertical="6dp"
+                android:onClick="listRanking"/>
         </LinearLayout>
 
+        <!--   Filter     -->
         <LinearLayout
             android:id="@+id/teams_filter"
             android:layout_width="match_parent"
@@ -53,7 +55,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right">
+                android:gravity="left">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -62,161 +64,29 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="Filtre"
-                        android:textColor="@color/white"
-                        android:textSize="20dp" />
-
                     <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_baseline_filter_list_24" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_black"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/team_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/dark_purple"
-                android:paddingVertical="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:gravity="end"
-                    android:text="#1"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/logo" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem ipsum"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="364 points"
-                    android:textColor="#808080"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right">
-
-                    <ImageView
                         android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/rocket_league" />
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:background="@color/light_purple"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:text="Tout"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:gravity="top"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/team_members"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/medium_purple"
-                android:paddingVertical="10dp"
-                android:paddingLeft="15dp">
-
-                <RelativeLayout
-                    android:id="@+id/member_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/pp_1"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_baseline_face_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/pp_1"
-                        android:text="Member #1"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/member_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp">
-
-                    <ImageView
-                        android:id="@+id/pp_2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_baseline_face_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/pp_2"
-                        android:text="Member #2"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/member_23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp">
-
-                    <ImageView
-                        android:id="@+id/pp_23"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/ic_baseline_face_24" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/pp_23"
-                        android:text="Member #3"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
-                </RelativeLayout>
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <FrameLayout
+        <!--    Teams    -->
+        <FrameLayout
             android:id="@+id/team_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </FrameLayout>
+    </LinearLayout>
 </FrameLayout>
