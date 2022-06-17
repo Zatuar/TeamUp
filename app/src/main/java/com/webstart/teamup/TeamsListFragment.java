@@ -65,4 +65,6 @@ public class TeamsListFragment extends Fragment {
         Intent selectedTeam = new Intent(getContext(),TeamActivity.class);
     }
 
+    public void createTeamForm(View view) {
+    }
 }
