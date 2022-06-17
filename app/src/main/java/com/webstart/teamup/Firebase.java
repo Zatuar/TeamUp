@@ -22,10 +22,10 @@ public class Firebase extends AppCompatActivity {
     public FirebaseUser getUser() {
         return user;
     }
-
     public void setUser(FirebaseUser user) {
         this.user = user;
     }
+
     public static Firebase getInstance(){
         return  FB;
     }

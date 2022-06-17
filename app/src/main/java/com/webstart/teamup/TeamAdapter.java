@@ -4,33 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.Holder> {
-//    private ClickItemListenne listener;
-    private List<Structure_Team> mItems;
+    private ClickTeamListenner listener;
+    private List<Structure_Team> teamsList;
     private Context context;
-//    private PGDnote pgd;
 
-    TeamAdapter(Context ctx, List<Structure_Team> l) {
-        this.mItems = l;
+    TeamAdapter( List<Structure_Team> l,ClickTeamListenner listener,Context ctx) {
+        this.teamsList = l;
         this.context = ctx;
-//        this.pgd = pgd;
+        this.listener = listener;
     }
     public void setItem(ArrayList<Structure_Team> notes) {
-        this.mItems.addAll(notes);
-//        this.listener = listener;
+        this.teamsList.addAll(notes);
     }
     static class Holder extends RecyclerView.ViewHolder {
         TextView team_rank;
@@ -54,15 +47,14 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        final Structure_Team key = mItems.get(position);
-        //holder.title.setText(key.getTitle());
-        holder.team_rank.setText(key.getRank());
-        holder.team_name.setText(key.getName());
-        holder.team_score.setText(key.getScore());
-        //holder.itemView.setOnClickListener(v -> listener.onItemClick(key));
+        final Structure_Team key = teamsList.get(position);
+        //holder.team_rank.setText(key.getRank());
+        //holder.team_name.setText(key.getName());
+        //holder.team_score.setText(key.getScore());
+        holder.itemView.setOnClickListener(v -> listener.onTeamClick(key));
     }
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return teamsList.size();
     }
 }

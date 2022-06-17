@@ -28,19 +28,19 @@ public class ConnexionActivity extends AppCompatActivity {
     }
     public void onStart() {
         super.onStart();
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-        /*if(currentUser != null){
+        /*FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
             currentUser.reload();
         }*/
     }
     public void goToHome(View view) {
-        //vérification des informations de connexion
-        //aller à la Home Page
         String e,pw;
         e=email.getText().toString();
         pw=password.getText().toString();
         if(!(e.equals("") || pw.equals(""))){
             if(fb.signIn(e,pw, this)){
+                Toast.makeText(this, "Connection",
+                        Toast.LENGTH_SHORT).show();
                 Intent home = new Intent(this,HomeActivity.class);
                 startActivity(home);
             }
