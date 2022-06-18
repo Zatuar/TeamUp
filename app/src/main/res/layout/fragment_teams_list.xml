@@ -28,7 +28,6 @@
             android:backgroundTint="@color/medium_purple"
             android:rotation="45"
             android:src="@drawable/ic_baseline_close_24"
-            android:text="Bouton ici"
             android:onClick="createTeamForm"/>
 
         <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->

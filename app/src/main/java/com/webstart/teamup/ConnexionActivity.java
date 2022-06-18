@@ -29,6 +29,7 @@ public class ConnexionActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_email);
         password = findViewById(R.id.edit_password);
     }
+    @Override
     public void onStart() {
         super.onStart();
         /*FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -45,26 +46,26 @@ public class ConnexionActivity extends AppCompatActivity {
         Intent home = new Intent(this,HomeActivity.class);
         if(!(e.equals("") || pw.equals(""))){
             mAuth.signInWithEmailAndPassword(e, pw)
-                    .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                user = mAuth.getCurrentUser();
-                                //updateUI(user);
-                                //user.reload();
-                                //result = true;
-                                Log.d("Success", "signInWithEmail:success");
-                                startActivity(home);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("Error", "signInWithEmail:failure", task.getException());
-                                Toast.makeText(ConnexionActivity.this, "Wrong email or password",
-                                        Toast.LENGTH_SHORT).show();
-                                //result =false;
-                                //updateUI(null);
-                            }
+                .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            user = mAuth.getCurrentUser();
+                            //updateUI(user);
+                            //user.reload();
+                            //result = true;
+                            Log.d("Success", "signInWithEmail:success");
+                            startActivity(home);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("Error", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(ConnexionActivity.this, "Wrong email or password",
+                                    Toast.LENGTH_SHORT).show();
+                            //result =false;
+                            //updateUI(null);
                         }
-                    });
+                    }
+                });
         }
     }
 

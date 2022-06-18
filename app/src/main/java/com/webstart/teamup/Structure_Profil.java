@@ -11,26 +11,65 @@ import java.util.HashMap;
 
 public class Structure_Profil {
 
-    private DatabaseReference databaseReference;
     private int id;
     private String pseudo;
     private String email;
+    private String phone;
+    private String pictureProfil;
+    private String description;
     private ArrayList<Structure_Team> teams;
+
+
+    private ArrayList<Structure_Jeu> games;
     private ArrayList<Structure_Abonnement> abonnements;
     public Structure_Profil() {
     }
+    public String getPseudo() {
+        return pseudo;
+    }
 
-    public Task<Void> add(Structure_Profil note){
-        return databaseReference.push().setValue(note);
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
-    public Task<Void> update(String key, HashMap<String, Object> map) {
-        return databaseReference.child(key).updateChildren(map);
+
+    public String getEmail() {
+        return email;
     }
-    public Task<Void> delete(String key){
-        return databaseReference.child(key).removeValue();
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public Query get() {
-        Log.i("INFO","Query");
-        return databaseReference.orderByKey();
+
+    public String getPhone() {
+        return phone;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPictureProfil() {
+        return pictureProfil;
+    }
+
+    public void setPictureProfil(String pictureProfil) {
+        this.pictureProfil = pictureProfil;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<Structure_Jeu> getGames() {
+        return games;
+    }
+
+    public void setGames(ArrayList<Structure_Jeu> games) {
+        this.games = games;
+    }
+
 }
