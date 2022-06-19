@@ -18,10 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class ConnexionActivity extends AppCompatActivity {
-    Firebase fb;
     EditText email,password;
-    private FirebaseAuth mAuth;
-    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,37 +30,35 @@ public class ConnexionActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        /*FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            currentUser.reload();
-        }*/
-        //fb = Firebase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        email.setText("");
+        password.setText("");
+        //Firebase.getInstance().mAuth = FirebaseAuth.getInstance();
+
+    }
+
     public void goToHome(View view) {
         String e,pw;
         e=email.getText().toString();
         pw=password.getText().toString();
         Intent home = new Intent(ConnexionActivity.this,HomeActivity.class);
         if(!(e.equals("") || pw.equals(""))){
-            mAuth.signInWithEmailAndPassword(e, pw)
+            Firebase.getInstance().mAuth.signInWithEmailAndPassword(e, pw)
                 .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            //user.reload();
-                            //result = true;
+                            Firebase.getInstance().setUser(Firebase.getInstance().mAuth.getCurrentUser());
                             Log.d("Success", "signInWithEmail:success");
                             startActivity(home);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("Error", "signInWithEmail:failure", task.getException());
                             Toast.makeText(ConnexionActivity.this, "Wrong email or password",
                                     Toast.LENGTH_SHORT).show();
-                            //result =false;
-                            //updateUI(null);
                         }
                     }
                 });
@@ -70,7 +66,6 @@ public class ConnexionActivity extends AppCompatActivity {
     }
 
     public void goToSignUp(View view) {
-        //go to SignUp Page
         Intent signUp = new Intent(this,InscriptionActivity.class);
         startActivity(signUp);
     }

@@ -19,12 +19,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Firebase extends AppCompatActivity {
-    FirebaseUser user;
+    private FirebaseUser user;
     boolean result;
 
-    private final FirebaseAuth mAuth =FirebaseAuth.getInstance();;
+    FirebaseAuth mAuth;
     private static final Firebase FB = new Firebase();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public FirebaseUser getUser() {
         return user;
@@ -37,6 +37,7 @@ public class Firebase extends AppCompatActivity {
         return  FB;
     }
     private Firebase() {
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public boolean signIn(String e, String pw, Intent ct) {
@@ -45,18 +46,12 @@ public class Firebase extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            //user.reload();
                             result = true;
-                            //Log.i("Success", "signInWithEmail:success");
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("Error", "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Wrong email or password",
                                     Toast.LENGTH_SHORT).show();
                             result =false;
-                            //updateUI(null);
                         }
                     }
                 });

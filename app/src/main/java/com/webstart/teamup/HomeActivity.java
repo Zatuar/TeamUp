@@ -1,22 +1,33 @@
 package com.webstart.teamup;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-
+    Structure_Profil users;
     BottomNavigationView menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setNavBar();
+        getUserProfil();
+    }
+
+    private void setNavBar() {
         menu = findViewById(R.id.home_menu);
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -49,8 +60,34 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        menu.setSelectedItemId(R.id.announces);
+        menu.setSelectedItemId(R.id.teams);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        // pop-up deconnexion
+        Firebase.getInstance().mAuth.signOut();
+    }
+
+    private void getUserProfil() {
+        Firebase.getInstance().db.collection("users")
+                .whereEqualTo("email", Firebase.getInstance().getUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("User", document.getId() + " => " + document.getData());
+                            }
+                        } else {
+                            Log.d("Error", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
 
     public void goToProfile(View view) {
     }
