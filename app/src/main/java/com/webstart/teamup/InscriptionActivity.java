@@ -99,6 +99,7 @@ public class InscriptionActivity extends AppCompatActivity {
                             Log.d("SUCESS", "createUserWithEmail:success");
                             user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            Firebase.getInstance().setData("users",profil);
                             startActivity(home);
                         } else {
                             // If sign in fails, display a message to the user.

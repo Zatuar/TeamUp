@@ -43,7 +43,8 @@
         android:id="@+id/home_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/home_header_separator"/>
+        app:layout_constraintTop_toBottomOf="@id/home_header_separator"
+        android:paddingBottom="100dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/home_menu"

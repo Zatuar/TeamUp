@@ -36,14 +36,14 @@ public class ConnexionActivity extends AppCompatActivity {
         if(currentUser != null){
             currentUser.reload();
         }*/
+        //fb = Firebase.getInstance();
         mAuth = FirebaseAuth.getInstance();
     }
     public void goToHome(View view) {
         String e,pw;
         e=email.getText().toString();
         pw=password.getText().toString();
-        fb = Firebase.getInstance();
-        Intent home = new Intent(this,HomeActivity.class);
+        Intent home = new Intent(ConnexionActivity.this,HomeActivity.class);
         if(!(e.equals("") || pw.equals(""))){
             mAuth.signInWithEmailAndPassword(e, pw)
                 .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {

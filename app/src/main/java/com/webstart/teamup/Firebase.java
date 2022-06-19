@@ -1,6 +1,5 @@
 package com.webstart.teamup;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -10,19 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.concurrent.Executor;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Firebase extends AppCompatActivity {
     FirebaseUser user;
-    boolean result= true;
+    boolean result;
 
-    private final FirebaseAuth mAuth;
+    private final FirebaseAuth mAuth =FirebaseAuth.getInstance();;
     private static final Firebase FB = new Firebase();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public FirebaseUser getUser() {
         return user;
@@ -35,24 +37,23 @@ public class Firebase extends AppCompatActivity {
         return  FB;
     }
     private Firebase() {
-        mAuth = FirebaseAuth.getInstance();
     }
 
-    public boolean signIn(String e, String pw, Context ct) {
+    public boolean signIn(String e, String pw, Intent ct) {
         mAuth.signInWithEmailAndPassword(e, pw)
                 .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user = mAuth.getCurrentUser();
+                            //user = mAuth.getCurrentUser();
                             //updateUI(user);
                             //user.reload();
                             result = true;
-                            Log.d("Success", "signInWithEmail:success");
+                            //Log.i("Success", "signInWithEmail:success");
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Error", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(ct, "Wrong email or password",
+                            Toast.makeText(getApplicationContext(), "Wrong email or password",
                                     Toast.LENGTH_SHORT).show();
                             result =false;
                             //updateUI(null);
@@ -83,5 +84,21 @@ public class Firebase extends AppCompatActivity {
                     }
                 });
         return result[0];
+    }
+    public void setData(String collection, Object obj){
+        db.collection(collection)
+                .add(obj)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Success", "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Failure", "Error adding document", e);
+                    }
+                });
     }
 }
