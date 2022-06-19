@@ -1,0 +1,21 @@
+{
+  "data" : [
+    {
+      "id": 1,
+      "last_message" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod finibus nisi. Nunc sollicitudin rhoncus nulla efficitur blandit. Sed suscipit eu neque non euismod.",
+      "last_message_date" : "19/06/2022 15h14",
+      "users" : [
+        {
+          "id" : 1,
+          "name" : "User #1",
+          "profile_picture" : "url"
+        },
+        {
+          "id" : 2,
+          "name" : "User #2",
+          "profile_picture" : "url"
+        }
+      ]
+    }
+  ]
+}

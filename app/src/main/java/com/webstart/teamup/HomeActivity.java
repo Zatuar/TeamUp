@@ -37,7 +37,9 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.chats:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content,new ChatFragment()).commit();
+                        ChatFragment chatFragment = new ChatFragment();
+                        chatFragment.getData();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content, chatFragment).commit();
                         return true;
 
                     case R.id.shop:

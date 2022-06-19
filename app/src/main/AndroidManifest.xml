@@ -18,6 +18,10 @@
             android:exported="false"
             android:theme="@style/Theme.TeamUp.NoActionBar" />
         <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.TeamUp.NoActionBar" />
+        <activity
             android:name=".TeamActivity"
             android:exported="false"
             android:theme="@style/Theme.TeamUp.NoActionBar" />

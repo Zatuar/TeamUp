@@ -30,4 +30,9 @@
     <string name="features">Fonctionnalitées</string>
     <string name="others">Divers</string>
     <string name="comming_soon">A venir</string>
+    <string name="lorem">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nunc euismod finibus nisi. Nunc sollicitudin rhoncus nulla efficitur blandit.
+        Sed suscipit eu neque non euismod.
+    </string>
 </resources>
