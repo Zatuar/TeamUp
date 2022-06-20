@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Structure_Profil {
 
 
-    private int id;
+    private String id;
     private String pseudo;
     private String email;
     private String phone;
@@ -25,10 +25,10 @@ public class Structure_Profil {
     public Structure_Profil() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,6 +79,13 @@ public class Structure_Profil {
     }
     public void setGames(ArrayList<Structure_Jeu> games) {
         this.games = games;
+    }
+
+    public ArrayList<Structure_Abonnement> getAbonnements() {
+        return abonnements;
+    }
+    public void setAbonnements(ArrayList<Structure_Abonnement> abonnements) {
+        this.abonnements = abonnements;
     }
 
 }

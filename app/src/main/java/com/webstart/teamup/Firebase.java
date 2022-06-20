@@ -19,10 +19,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Firebase extends AppCompatActivity {
-    private FirebaseUser user;
+
     boolean result;
 
+    private FirebaseUser user;
     FirebaseAuth mAuth;
+    Structure_Profil User = new Structure_Profil();
     private static final Firebase FB = new Firebase();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 

@@ -1,5 +1,6 @@
 package com.webstart.teamup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,12 +13,12 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
-    Structure_Profil users;
     BottomNavigationView menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,15 @@ public class HomeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("User", document.getId() + " => " + document.getData());
+                                Gson gson = new Gson();
+                                String datatoString = gson.toJson(document.getData());
+                                Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
+                                Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
+                                Firebase.getInstance().User.setId(document.getId());
+                                Log.d("UserId", " => " + Firebase.getInstance().User.getId());
+                                Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
+                                Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
+
                             }
                         } else {
                             Log.d("Error", "Error getting documents: ", task.getException());
@@ -90,5 +99,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void goToProfile(View view) {
+        Intent profil = new Intent(this,ProfilActivity.class);
+        startActivity(profil);
     }
 }

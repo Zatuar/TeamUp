@@ -26,8 +26,6 @@ public class InscriptionActivity extends AppCompatActivity {
     String pw;
     String games;
 
-    private FirebaseAuth mAuth;
-    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,6 @@ public class InscriptionActivity extends AppCompatActivity {
         transaction.add(R.id.fragment_inscription,Inscription1Fragment.class,null,"Page 1");
         transaction.setReorderingAllowed(true);
         transaction.commit();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -90,23 +87,20 @@ public class InscriptionActivity extends AppCompatActivity {
         Intent home = new Intent(this, HomeActivity.class);
         Log.i("Verif",(profil.getEmail()+" "+ pw));
         if(!selectGame.getText().toString().equals("")) {
-            mAuth.createUserWithEmailAndPassword(profil.getEmail(), pw)
+            Firebase.getInstance().mAuth.createUserWithEmailAndPassword(profil.getEmail(), pw)
                 .addOnCompleteListener(InscriptionActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.d("SUCESS", "createUserWithEmail:success");
-                            user = mAuth.getCurrentUser();
-                            //updateUI(user);
-                            Firebase.getInstance().setData("users",profil);
+                            Firebase.getInstance().setUser(Firebase.getInstance().mAuth.getCurrentUser());
+                            Firebase.getInstance().User.setId(Firebase.getInstance().mAuth.getUid());
+                            Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getUid()).set(profil);
                             startActivity(home);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("SUCESS", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(InscriptionActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
                     }
                 });
