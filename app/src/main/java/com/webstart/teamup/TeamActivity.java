@@ -49,8 +49,6 @@ public class TeamActivity extends AppCompatActivity {
         team_score.setText("("+team.getScore()+"pts)");
         TextView team_name = findViewById(R.id.team_name);
         team_name.setText(team.getName());
-//        TextView bodyNote = findViewById(R.id.bodyN);
-//        bodyNote.setText(note.getBody());
     }
 
     public void goToProfile(View view) {
