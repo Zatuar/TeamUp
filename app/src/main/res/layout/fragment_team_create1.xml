@@ -82,6 +82,7 @@
                 android:backgroundTint="@color/white"
                 android:textColorHint="@color/white"/>
         </LinearLayout>
+
         <Button
             android:id="@+id/next"
             android:layout_width="wrap_content"
@@ -93,7 +94,7 @@
             android:textSize="16dp"
             android:paddingHorizontal="80dp"
             android:paddingVertical="10dp"
-            android:layout_marginBottom="42dp"
+            android:layout_marginTop="18dp"
             android:onClick="goNext" />
     </LinearLayout>
 </FrameLayout>

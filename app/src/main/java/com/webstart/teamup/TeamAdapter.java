@@ -22,9 +22,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.Holder> {
         this.context = ctx;
         this.listener = listener;
     }
-    public void setItem(ArrayList<Structure_Team> notes) {
-        this.teamsList.addAll(notes);
-    }
     static class Holder extends RecyclerView.ViewHolder {
         TextView team_rank;
         TextView team_name;
@@ -48,9 +45,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final Structure_Team key = teamsList.get(position);
-        //holder.team_rank.setText(key.getRank());
-        //holder.team_name.setText(key.getName());
-        //holder.team_score.setText(key.getScore());
         holder.itemView.setOnClickListener(v -> listener.onTeamClick(key));
     }
     @Override
