@@ -102,4 +102,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent profil = new Intent(this,ProfilActivity.class);
         startActivity(profil);
     }
+
+    public void createTeamForm(View view) {
+        Intent createTeam = new Intent(this,TeamCreateActivity.class);
+        startActivity(createTeam);
+    }
 }

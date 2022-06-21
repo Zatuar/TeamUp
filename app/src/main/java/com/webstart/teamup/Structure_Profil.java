@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Structure_Profil {
-
-
     private String id;
     private String pseudo;
     private String email;

@@ -48,14 +48,16 @@ public class AnnouncementFragment extends Fragment {
         Structure_Team team;
         ArrayList<Structure_Profil_Min> members = new ArrayList<>();
         Structure_Jeu game;
+        ArrayList<String> annonceIds = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
             members.add(new Structure_Profil_Min("Membre #"+1, "", i));
+            annonceIds.add("Annonce #"+i);
         }
 
         for (int i = 0; i < 5; i++) {
             game = new Structure_Jeu("Jeu #"+1, "", i);
-            team = new Structure_Team("Team #"+i, "", i, i*10, members, i, game);
+            team = new Structure_Team("Team #"+i, "", "description", i, i*10, i, members, game, annonceIds);
             annonces.add(new Structure_Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", i, team));
         }
         showAnnonce(annonces);

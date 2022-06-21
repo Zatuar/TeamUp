@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -50,11 +51,13 @@ public class TeamsListFragment extends Fragment {
     void getData() {
         //appelle API
         ArrayList<Structure_Profil_Min> members = new ArrayList<>();
+        ArrayList<String> annonceIds = new ArrayList<>();
         Structure_Jeu game = new Structure_Jeu("Jeu 1", "url", 1);;
         for (int i = 0; i < 5; i++) {
             members.add(new Structure_Profil_Min("Member "+i, "photo_url", i));
+            annonceIds.add("Annonce #"+i);
         }
-        teams.add(new Structure_Team("Team A", "url_logo", 1, 1000, members, 1, game));
+        teams.add(new Structure_Team("Team A", "url_logo", "description", 1, 1000, 1, members, game, annonceIds));
         showTeams(teams);
     }
 
@@ -65,8 +68,5 @@ public class TeamsListFragment extends Fragment {
     private void selectedTeam(Structure_Team team) {
         Intent selectedTeam = new Intent(getContext(),TeamActivity.class);
         startActivity(selectedTeam);
-    }
-
-    public void createTeamForm(View view) {
     }
 }

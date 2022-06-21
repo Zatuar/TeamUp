@@ -20,24 +20,15 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <ImageButton
+            android:id="@+id/create_team_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/round_button"
             android:backgroundTint="@color/medium_purple"
+            android:onClick="createTeamForm"
             android:rotation="45"
-            android:src="@drawable/ic_baseline_close_24"
-            android:onClick="createTeamForm"/>
-
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:src="@drawable/ic_baseline_create_24"-->
-        <!--            android:backgroundTint="@color/medium_purple"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            android:layout_marginRight="14dp"-->
-        <!--            android:layout_marginTop="50dp"/>-->
+            android:src="@drawable/ic_baseline_close_24" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

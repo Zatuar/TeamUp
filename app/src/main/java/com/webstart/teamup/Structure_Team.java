@@ -3,24 +3,27 @@ package com.webstart.teamup;
 import java.util.ArrayList;
 
 public class Structure_Team {
-    private String name, logo;
+    private String name, logo, description;
     private Integer id;
     private Integer score;
     private Integer rank;
     private ArrayList<Structure_Profil_Min> members;
     private Structure_Jeu game;
+    private ArrayList<String> annonceIds;
 
     public Structure_Team() {
     }
 
-    public Structure_Team(String name, String logo, Integer id, Integer score, ArrayList<Structure_Profil_Min> members, Integer rank, Structure_Jeu game) {
+    public Structure_Team(String name, String logo, String description, Integer id, Integer score, Integer rank, ArrayList<Structure_Profil_Min> members, Structure_Jeu game, ArrayList<String> annonceIds) {
         this.name = name;
         this.logo = logo;
+        this.description = description;
         this.id = id;
         this.score = score;
-        this.members = members;
         this.rank = rank;
+        this.members = members;
         this.game = game;
+        this.annonceIds = annonceIds;
     }
 
     public String getName() {
@@ -77,5 +80,21 @@ public class Structure_Team {
 
     public void setGame(Structure_Jeu game) {
         this.game = game;
+    }
+
+    public ArrayList<String> getAnnonceIds() {
+        return annonceIds;
+    }
+
+    public void setAnnonceIds(ArrayList<String> annonceIds) {
+        this.annonceIds = annonceIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

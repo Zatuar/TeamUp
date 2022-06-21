@@ -30,9 +30,13 @@
     <string name="features">Fonctionnalitées</string>
     <string name="others">Divers</string>
     <string name="comming_soon">A venir</string>
-    <string name="lorem">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nunc euismod finibus nisi. Nunc sollicitudin rhoncus nulla efficitur blandit.
-        Sed suscipit eu neque non euismod.
-    </string>
+    <string name="create_team_name">Nom de l\'équipe</string>
+    <string name="create_team">Création</string>
+    <string name="create_team_description">Description</string>
+    <string name="create_team_game">Jeu</string>
+    <string name="create_team_members">Joueurs</string>
+    <string name="create_team_members_placeholder">Nom du joueur</string>
+    <string name="create_annonce">Créer une annonce</string>
+    <string name="create_annonce_title_placeholder">Titre de l\'annonce</string>
+    <string name="create_annonce_body_placeholder">Message de l\'annonce</string>
 </resources>
