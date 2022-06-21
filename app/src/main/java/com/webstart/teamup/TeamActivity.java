@@ -43,8 +43,12 @@ public class TeamActivity extends AppCompatActivity {
         membersRecycler.setAdapter(adapter);
         membersRecycler.setLayoutManager(layoutManager);
 
-//        TextView titleNote = findViewById(R.id.titleN);
-//        titleNote.setText(note.getTitle());
+        TextView team_rank = findViewById(R.id.team_rank);
+        team_rank.setText("#"+team.getRank()+" ");
+        TextView team_score = findViewById(R.id.team_score);
+        team_score.setText("("+team.getScore()+"pts)");
+        TextView team_name = findViewById(R.id.team_name);
+        team_name.setText(team.getName());
 //        TextView bodyNote = findViewById(R.id.bodyN);
 //        bodyNote.setText(note.getBody());
     }
