@@ -4,6 +4,100 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeamActivity">
+    tools:context=".TeamActivity"
+    android:background="@color/light_purple">
 
+    <LinearLayout
+        android:id="@+id/home_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="end"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:background="@color/medium_purple">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_notifications_24"
+            android:background="@drawable/round_button_white_borders"
+            android:layout_marginEnd="14dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_face_24"
+            android:background="@drawable/round_button_white_borders"
+            android:onClick="goToProfile"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/home_header"
+        android:gravity="center"
+        android:layout_marginTop="34dp">
+        <ImageView
+            android:id="@+id/team_logo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/logo"
+            android:background="@drawable/round_button_white_borders" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:id="@+id/team_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#X "
+                android:textSize="34dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Team A"
+                android:textSize="34dp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_top_bottom_white_purple_bg"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:backgroundTint="@color/medium_purple">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Lineup"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Candidatures"
+                    android:textSize="10dp"
+                    android:backgroundTint="@color/light_purple"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

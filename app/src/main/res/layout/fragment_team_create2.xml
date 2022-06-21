@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/create_annonce_body_placeholder"
             android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"/>
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="10dp"/>
 
         <Button
             android:id="@+id/next"
@@ -48,8 +49,7 @@
             android:textSize="16dp"
             android:paddingHorizontal="80dp"
             android:paddingVertical="10dp"
-            android:layout_marginBottom="42dp"
             android:onClick="createTeam"
-            android:tag="2" />
+            android:layout_marginTop="18dp"/>
     </LinearLayout>
 </FrameLayout>

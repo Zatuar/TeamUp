@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class TeamsListFragment extends Fragment {
@@ -67,6 +69,9 @@ public class TeamsListFragment extends Fragment {
 
     private void selectedTeam(Structure_Team team) {
         Intent selectedTeam = new Intent(getContext(),TeamActivity.class);
+        Gson gson = new Gson();
+        String teamToString = gson.toJson(team);
+        selectedTeam.putExtra("team", teamToString);
         startActivity(selectedTeam);
     }
 }
