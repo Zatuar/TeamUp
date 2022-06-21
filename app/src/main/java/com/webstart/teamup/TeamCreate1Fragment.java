@@ -48,7 +48,4 @@ public class TeamCreate1Fragment extends Fragment {
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
-
-    public void selectMembers(View view) {
-    }
 }

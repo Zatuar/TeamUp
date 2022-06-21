@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Structure_Team {
     private String name, logo, description;
-    private Integer id;
+    private String id;
     private Integer score;
     private Integer rank;
     private ArrayList<Structure_Profil_Min> members;
@@ -14,7 +14,7 @@ public class Structure_Team {
     public Structure_Team() {
     }
 
-    public Structure_Team(String name, String logo, String description, Integer id, Integer score, Integer rank, ArrayList<Structure_Profil_Min> members, Structure_Jeu game, ArrayList<String> annonceIds) {
+    public Structure_Team(String name, String logo, String description, String id, Integer score, Integer rank, ArrayList<Structure_Profil_Min> members, Structure_Jeu game, ArrayList<String> annonceIds) {
         this.name = name;
         this.logo = logo;
         this.description = description;
@@ -42,11 +42,11 @@ public class Structure_Team {
         this.logo = logo;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
