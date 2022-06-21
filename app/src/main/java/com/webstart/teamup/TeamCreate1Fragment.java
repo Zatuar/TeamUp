@@ -30,7 +30,9 @@ public class TeamCreate1Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        for (int i = 0; i < 5; i++) {
+            games.add("Jeu #"+i);
+        }
     }
 
     @Override
@@ -41,9 +43,6 @@ public class TeamCreate1Fragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        for (int i = 0; i < 5; i++) {
-            games.add("Jeu #"+i);
-        }
         spinner = view.findViewById(R.id.team_game);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, games);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);

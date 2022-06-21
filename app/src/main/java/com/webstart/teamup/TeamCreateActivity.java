@@ -50,15 +50,15 @@ public class TeamCreateActivity extends AppCompatActivity {
     }
 
     public void createTeam(View view){
-        Intent teamActivity = new Intent(this,TeamActivity.class);
+        //Intent teamActivity = new Intent(this,HomeActivity.class);
         EditText annonce_title = findViewById(R.id.annonce_title);
         EditText annonce_body = findViewById(R.id.annonce_body);
 
         annonce.setTitle(annonce_title.getText().toString());
         annonce.setBody(annonce_body.getText().toString());
         annonce.setTeam(team);
-        
-        startActivity(teamActivity);
+        finish();
+        //startActivity(teamActivity);
     }
 
     public void goToProfile(View view) {

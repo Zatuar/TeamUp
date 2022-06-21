@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/create_team_name"
                 android:textSize="20dp"
+                android:inputType="text"
                 android:background="@drawable/bottom_border_white"
                 android:textColorHint="@color/white"/>
 

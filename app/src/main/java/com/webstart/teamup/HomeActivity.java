@@ -1,10 +1,13 @@
 package com.webstart.teamup;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,17 +22,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class HomeActivity extends AppCompatActivity {
+
+    Drawable white;
+    Drawable orange;
+
     BottomNavigationView menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        white = getDrawable(R.drawable.bottom_border_white);
+        orange = getDrawable(R.drawable.bottom_border_light_orange);
+        menu = findViewById(R.id.home_menu);
         setNavBar();
         getUserProfil();
     }
 
     private void setNavBar() {
-        menu = findViewById(R.id.home_menu);
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -106,5 +115,28 @@ public class HomeActivity extends AppCompatActivity {
     public void createTeamForm(View view) {
         Intent createTeam = new Intent(this,TeamCreateActivity.class);
         startActivity(createTeam);
+    }
+
+    //TeamsFragment
+    public void listRanking(View view) {
+        TextView myteam = findViewById(R.id.my_teams);
+        TextView ranking = findViewById(R.id.ranking);
+        //myteam.setBackground(Drawable.createFromPath(String.valueOf(R.drawable.bottom_border_white)));
+        myteam.setBackground(white);
+        ranking.setBackground(orange);
+        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,new TeamsRankingFragment()).commit();
+    }
+
+    public void listMyTeams(View view) {
+        TextView myteam = findViewById(R.id.my_teams);
+        TextView ranking = findViewById(R.id.ranking);
+        myteam.setBackground(orange);
+        ranking.setBackground(white);
+        TeamsListFragment t = new TeamsListFragment();
+        t.getData();
+        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,t).commit();
+    }
+    //TeamsList
+    public void createTeam(View view) {
     }
 }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,8 +42,5 @@ public class TeamsFragment extends Fragment {
     }
 
     public void listRanking(View view) {
-    }
-
-    public void listMyTeams(View view) {
     }
 }

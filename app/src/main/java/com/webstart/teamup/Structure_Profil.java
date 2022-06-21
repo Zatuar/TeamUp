@@ -16,7 +16,7 @@ public class Structure_Profil {
     private String phone;
     private String pictureProfil;
     private String description;
-    private ArrayList<Structure_Team> teams;
+    private ArrayList<String> teams;
     private ArrayList<Structure_Jeu> games;
     private ArrayList<Structure_Abonnement> abonnements;
 
@@ -65,10 +65,10 @@ public class Structure_Profil {
         this.description = description;
     }
 
-    public ArrayList<Structure_Team> getTeams() {
+    public ArrayList<String> getTeams() {
         return teams;
     }
-    public void setTeams(ArrayList<Structure_Team> teams) {
+    public void setTeams(ArrayList<String> teams) {
         this.teams = teams;
     }
 
