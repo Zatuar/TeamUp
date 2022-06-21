@@ -47,12 +47,12 @@ public class ConnexionActivity extends AppCompatActivity {
         pw=password.getText().toString();
         Intent home = new Intent(ConnexionActivity.this,HomeActivity.class);
         if(!(e.equals("") || pw.equals(""))){
-            Firebase.getInstance().mAuth.signInWithEmailAndPassword(e, pw)
+            Firebase.getInstance().getmAuth().signInWithEmailAndPassword(e, pw)
                 .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Firebase.getInstance().setUser(Firebase.getInstance().mAuth.getCurrentUser());
+                            Firebase.getInstance().setUser(Firebase.getInstance().getmAuth().getCurrentUser());
                             Log.d("Success", "signInWithEmail:success");
                             startActivity(home);
                         } else {

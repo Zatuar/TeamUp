@@ -17,15 +17,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Firebase extends AppCompatActivity {
 
+    private static final Firebase FB = new Firebase();
     boolean result;
 
-    private FirebaseUser user;
-    FirebaseAuth mAuth;
     Structure_Profil User = new Structure_Profil();
-    private static final Firebase FB = new Firebase();
+
+    private FirebaseUser user;
+    private FirebaseAuth mAuth;
+
+    FirebaseStorage storage = FirebaseStorage.getInstance("gs://teamup-57580.appspot.com");
+    StorageReference storageRef = storage.getReference();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public FirebaseUser getUser() {
@@ -33,6 +39,13 @@ public class Firebase extends AppCompatActivity {
     }
     public void setUser(FirebaseUser user) {
         this.user = user;
+    }
+
+    public FirebaseAuth getmAuth() {
+        return mAuth;
+    }
+    public void setmAuth(FirebaseAuth mAuth) {
+        this.mAuth = mAuth;
     }
 
     public static Firebase getInstance(){

@@ -55,8 +55,8 @@ public class InscriptionActivity extends AppCompatActivity {
                     pw = verifpw.getText().toString();
                     profil.setEmail(verifemail.getText().toString());
                     profil.setPhone(verifphone.getText().toString());
-                    Log.i("ProfilE", profil.getEmail());
-                    Log.i("ProfilP", profil.getPhone());
+                    //Log.i("ProfilE", profil.getEmail());
+                    //Log.i("ProfilP", profil.getPhone());
                     transaction.replace(R.id.fragment_inscription, Inscription2Fragment.class, null, "Page 2");
                     transaction.setReorderingAllowed(true);
                     transaction.addToBackStack("Page 1");
@@ -85,16 +85,16 @@ public class InscriptionActivity extends AppCompatActivity {
     public void goToHome(View view) {
         EditText selectGame = findViewById(R.id.edit_game);
         Intent home = new Intent(this, HomeActivity.class);
-        Log.i("Verif",(profil.getEmail()+" "+ pw));
+        //Log.i("Verif",(profil.getEmail()+" "+ pw));
         if(!selectGame.getText().toString().equals("")) {
-            Firebase.getInstance().mAuth.createUserWithEmailAndPassword(profil.getEmail(), pw)
+            Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
                 .addOnCompleteListener(InscriptionActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("SUCESS", "createUserWithEmail:success");
-                            Firebase.getInstance().setUser(Firebase.getInstance().mAuth.getCurrentUser());
-                            Firebase.getInstance().User.setId(Firebase.getInstance().mAuth.getUid());
+                            Firebase.getInstance().setUser(Firebase.getInstance().getmAuth().getCurrentUser());
+                            Firebase.getInstance().User.setId(Firebase.getInstance().getmAuth().getUid());
                             Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getUid()).set(profil);
                             startActivity(home);
                         } else {

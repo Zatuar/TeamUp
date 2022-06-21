@@ -47,7 +47,14 @@
             android:layout_marginTop="12dp"
             android:src="@drawable/circle_camera_icon"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:layout_marginTop="-30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center"
+            android:onClick="selectPictureProfil"/>
         <EditText
             android:id="@+id/edit_name"
             android:layout_width="300dp"

@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         // pop-up deconnexion
-        Firebase.getInstance().mAuth.signOut();
+        Firebase.getInstance().getmAuth().signOut();
     }
 
     private void getUserProfil() {
@@ -80,15 +80,15 @@ public class HomeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                //transformation de la map en json pour récupérer les infos du user
                                 Gson gson = new Gson();
                                 String datatoString = gson.toJson(document.getData());
-                                Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
+                                //Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
                                 Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
                                 Firebase.getInstance().User.setId(document.getId());
-                                Log.d("UserId", " => " + Firebase.getInstance().User.getId());
-                                Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
-                                Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
-
+                                //Log.d("UserId", " => " + Firebase.getInstance().User.getId());
+                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
+                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
                             }
                         } else {
                             Log.d("Error", "Error getting documents: ", task.getException());
