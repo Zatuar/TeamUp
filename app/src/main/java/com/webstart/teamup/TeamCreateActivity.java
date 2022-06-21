@@ -1,15 +1,22 @@
 package com.webstart.teamup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
 
@@ -37,9 +44,11 @@ public class TeamCreateActivity extends AppCompatActivity {
         EditText team_name = findViewById(R.id.team_name);
         Spinner team_game = findViewById(R.id.team_game);
         EditText team_member = findViewById(R.id.team_member);
+        EditText team_bio = findViewById(R.id.team_description);
         if (!(team_name.getText().toString().equals("") || team_game.getSelectedItem().toString().equals(""))) {
             game.setName(team_game.getSelectedItem().toString());
             team.setName(team_name.getText().toString());
+            team.setDescription(team_bio.getText().toString());
             team.setGame(game);
 
             transaction.replace(R.id.fragment_team_create, TeamCreate2Fragment.class, null, "Page 2");
@@ -50,15 +59,15 @@ public class TeamCreateActivity extends AppCompatActivity {
     }
 
     public void createTeam(View view){
-        //Intent teamActivity = new Intent(this,HomeActivity.class);
         EditText annonce_title = findViewById(R.id.annonce_title);
         EditText annonce_body = findViewById(R.id.annonce_body);
 
         annonce.setTitle(annonce_title.getText().toString());
         annonce.setBody(annonce_body.getText().toString());
-        annonce.setTeam(team);
+        annonce.setTeam(team.getName());
+        Firebase.getInstance().db.collection("teams").document().set(team);
+        Firebase.getInstance().db.collection("annonces").document().set(annonce);
         finish();
-        //startActivity(teamActivity);
     }
 
     public void goToProfile(View view) {

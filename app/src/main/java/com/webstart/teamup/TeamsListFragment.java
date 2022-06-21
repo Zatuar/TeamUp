@@ -59,7 +59,7 @@ public class TeamsListFragment extends Fragment {
             members.add(new Structure_Profil_Min("Member "+i, "photo_url", i));
             annonceIds.add("Annonce #"+i);
         }
-        teams.add(new Structure_Team("Team A", "url_logo", "description", 1, 1000, 1, members, game, annonceIds));
+        teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         showTeams(teams);
     }
 

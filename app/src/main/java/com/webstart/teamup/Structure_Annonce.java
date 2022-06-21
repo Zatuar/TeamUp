@@ -3,12 +3,12 @@ package com.webstart.teamup;
 public class Structure_Annonce {
     private String title, body;
     private Integer id;
-    private Structure_Team team;
+    private String team;
 
     public Structure_Annonce() {
     }
 
-    public Structure_Annonce(String title, String body, Integer id, Structure_Team team) {
+    public Structure_Annonce(String title, String body, Integer id, String team) {
         this.title = title;
         this.body = body;
         this.id = id;
@@ -39,11 +39,11 @@ public class Structure_Annonce {
         this.id = id;
     }
 
-    public Structure_Team getTeam() {
+    public String getTeam() {
         return team;
     }
 
-    public void setTeam(Structure_Team team) {
+    public void setTeam(String team) {
         this.team = team;
     }
 }

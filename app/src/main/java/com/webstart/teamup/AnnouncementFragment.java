@@ -57,8 +57,8 @@ public class AnnouncementFragment extends Fragment {
 
         for (int i = 0; i < 5; i++) {
             game = new Structure_Jeu("Jeu #"+1, "", i);
-            team = new Structure_Team("Team #"+i, "", "description", i, i*10, i, members, game, annonceIds);
-            annonces.add(new Structure_Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", i, team));
+            team = new Structure_Team("Team #"+i, "", "description", String.valueOf(i), i*10, i, members, game, annonceIds);
+            annonces.add(new Structure_Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", i, team.getName()));
         }
         showAnnonce(annonces);
     }

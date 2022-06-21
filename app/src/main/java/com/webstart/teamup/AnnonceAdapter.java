@@ -34,7 +34,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.Holder> 
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final Structure_Annonce key = annoncesList.get(position);
         holder.annonce_title.setText(key.getTitle());
-        holder.annonce_team_name.setText(key.getTeam().getName());
+        holder.annonce_team_name.setText(key.getTeam());
         holder.annonce_body.setText(key.getBody());
         holder.itemView.setOnClickListener(v -> clickAnnonceListener.onAnnonceClick(key));
     }
