@@ -35,6 +35,11 @@ public class HomeActivity extends AppCompatActivity {
         orange = getDrawable(R.drawable.bottom_border_light_orange);
         menu = findViewById(R.id.home_menu);
         setNavBar();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getUserProfil();
     }
 
@@ -95,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
                                 //Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
                                 Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
                                 Firebase.getInstance().User.setId(document.getId());
-                                //Log.d("UserId", " => " + Firebase.getInstance().User.getId());
+                                //Log.d("UserTeamsID", " => " + Firebase.getInstance().User.getTeams());
                                 //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
                                 //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
                             }
@@ -106,12 +111,11 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
-
     public void goToProfile(View view) {
         Intent profil = new Intent(this,ProfilActivity.class);
         startActivity(profil);
     }
-
+    //TeamListFragment
     public void createTeamForm(View view) {
         Intent createTeam = new Intent(this,TeamCreateActivity.class);
         startActivity(createTeam);
@@ -136,7 +140,5 @@ public class HomeActivity extends AppCompatActivity {
         t.getData();
         getSupportFragmentManager().beginTransaction().replace(R.id.team_content,t).commit();
     }
-    //TeamsList
-    public void createTeam(View view) {
-    }
+
 }

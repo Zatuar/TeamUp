@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class InscriptionActivity extends AppCompatActivity {
     FragmentManager manager;
     FragmentTransaction transaction;
@@ -95,6 +97,11 @@ public class InscriptionActivity extends AppCompatActivity {
                             Log.d("SUCESS", "createUserWithEmail:success");
                             Firebase.getInstance().setUser(Firebase.getInstance().getmAuth().getCurrentUser());
                             Firebase.getInstance().User.setId(Firebase.getInstance().getmAuth().getUid());
+                            profil.setId(Firebase.getInstance().getmAuth().getUid());
+                            profil.setGames(new ArrayList<Structure_Jeu>());
+                            profil.setAbonnements(new ArrayList<Structure_Abonnement>());
+                            profil.setPictureProfil("");
+                            profil.setTeams(new ArrayList<>());
                             Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getUid()).set(profil);
                             startActivity(home);
                         } else {
