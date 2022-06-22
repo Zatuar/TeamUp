@@ -51,14 +51,14 @@ public class AnnouncementFragment extends Fragment {
         ArrayList<String> annonceIds = new ArrayList<>();
 
         for (int i = 0; i < 3; i++) {
-            members.add(new Structure_Profil_Min("Membre #"+1, "", i));
+            members.add(new Structure_Profil_Min("Membre #"+1, "", String.valueOf(i)));
             annonceIds.add("Annonce #"+i);
         }
 
         for (int i = 0; i < 5; i++) {
             game = new Structure_Jeu("Jeu #"+1, "", i);
             team = new Structure_Team("Team #"+i, "", "description", String.valueOf(i), i*10, i, members, game, annonceIds);
-            annonces.add(new Structure_Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", i, team.getName()));
+            annonces.add(new Structure_Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", String.valueOf(i), team.getName()));
         }
         showAnnonce(annonces);
     }

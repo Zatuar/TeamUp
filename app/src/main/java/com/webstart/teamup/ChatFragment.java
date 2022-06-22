@@ -51,7 +51,7 @@ public class ChatFragment extends Fragment {
         Structure_Profil_Min other_user = new Structure_Profil_Min();
 
         for (int i = 0; i < 2; i++) {
-            other_user = new Structure_Profil_Min("User #"+1, "", i);
+            other_user = new Structure_Profil_Min("User #"+1, "", String.valueOf(i));
         }
 
         for (int i = 0; i < 5; i++) {
