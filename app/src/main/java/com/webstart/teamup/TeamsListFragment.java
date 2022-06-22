@@ -49,7 +49,6 @@ public class TeamsListFragment extends Fragment {
             }
         },getContext());
         teamsRV.setAdapter(adapter);
-        
         return view;
     }
 
@@ -87,11 +86,6 @@ public class TeamsListFragment extends Fragment {
                                 Gson gson = new Gson();
                                 String datatoString = gson.toJson(document.getData());
                                 Log.d("FirebaseTeams", document.getId() + " => " + datatoString);
-                                //Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
-                                //Firebase.getInstance().User.setId(document.getId());
-                                //Log.d("UserTeamsID", " => " + Firebase.getInstance().User.getTeams());
-                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
-                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
                             }
                         } else {
                             Log.d("Error", "Error getting documents: ", task.getException());

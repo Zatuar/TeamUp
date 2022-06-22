@@ -30,11 +30,7 @@ public class TeamsRankingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
-
-    public static TeamsRankingFragment newInstance(String param1, String param2) {
-        TeamsRankingFragment fragment = new TeamsRankingFragment();
-        return fragment;
+        getData();
     }
 
     @Override
@@ -60,15 +56,6 @@ public class TeamsRankingFragment extends Fragment {
     }
 
     void getData() {
-        //appelle API
-//        ArrayList<Structure_Profil_Min> members = new ArrayList<>();
-//        ArrayList<String> annonceIds = new ArrayList<>();
-//        Structure_Jeu game = new Structure_Jeu("Jeu 1", "url", 1);;
-//        for (int i = 0; i < 5; i++) {
-//            members.add(new Structure_Profil_Min("Member "+i, "photo_url", String.valueOf(i)));
-//            annonceIds.add("Annonce #"+i);
-//        }
-//        teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         getTeams();
         showTeams(teams);
     }
