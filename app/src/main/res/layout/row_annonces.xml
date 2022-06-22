@@ -46,9 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/annonce_team"
-        android:hint="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis lectus dui. Sed suscipit orci nulla, vitae dignissim purus pretium a. Mauris enim tellus, ultricies ut blandit ac, mollis eget odio."
+        android:hint="content"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/annonce_team" />
+        app:layout_constraintTop_toBottomOf="@id/annonce_team"
+        android:maxLines="2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

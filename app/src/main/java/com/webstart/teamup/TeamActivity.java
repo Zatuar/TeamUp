@@ -55,6 +55,4 @@ public class TeamActivity extends AppCompatActivity {
         Intent profil = new Intent(this,ProfilActivity.class);
         startActivity(profil);
     }
-
-
 }
