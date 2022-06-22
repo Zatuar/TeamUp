@@ -128,7 +128,9 @@ public class HomeActivity extends AppCompatActivity {
         //myteam.setBackground(Drawable.createFromPath(String.valueOf(R.drawable.bottom_border_white)));
         myteam.setBackground(white);
         ranking.setBackground(orange);
-        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,new TeamsRankingFragment()).commit();
+        TeamsRankingFragment t = new TeamsRankingFragment();
+        t.getData();
+        getSupportFragmentManager().beginTransaction().replace(R.id.team_content, t).commit();
     }
 
     public void listMyTeams(View view) {
