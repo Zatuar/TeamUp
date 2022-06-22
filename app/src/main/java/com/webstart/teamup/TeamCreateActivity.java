@@ -17,6 +17,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firestore.v1.WriteResult;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -50,7 +55,7 @@ public class TeamCreateActivity extends AppCompatActivity {
             team.setName(team_name.getText().toString());
             team.setDescription(team_bio.getText().toString());
             team.setGame(game);
-
+            addMembers();
             transaction.replace(R.id.fragment_team_create, TeamCreate2Fragment.class, null, "Page 2");
             transaction.setReorderingAllowed(true);
             transaction.addToBackStack("Page 1");
@@ -58,6 +63,16 @@ public class TeamCreateActivity extends AppCompatActivity {
         }
     }
 
+    private void addMembers() {
+        ArrayList<Structure_Profil_Min> members = new ArrayList<>();
+        members.add(new Structure_Profil_Min(Firebase.getInstance().User.getPseudo(),Firebase.getInstance().User.getPictureProfil(),Firebase.getInstance().User.getId()));
+        team.setMembers(members);
+    }
+
+    public void goToProfile(View view) {
+        Intent profil = new Intent(this,ProfilActivity.class);
+        startActivity(profil);
+    }
     public void createTeam(View view){
         EditText annonce_title = findViewById(R.id.annonce_title);
         EditText annonce_body = findViewById(R.id.annonce_body);
@@ -65,13 +80,38 @@ public class TeamCreateActivity extends AppCompatActivity {
         annonce.setTitle(annonce_title.getText().toString());
         annonce.setBody(annonce_body.getText().toString());
         annonce.setTeam(team.getName());
-        Firebase.getInstance().db.collection("teams").document().set(team);
-        Firebase.getInstance().db.collection("annonces").document().set(annonce);
+        team.setScore(0);
+        //Firebase.getInstance().db.collection("annonces").document().set(annonce);
+        Firebase.getInstance().User.getTeams().add(team.getName());
+        Firebase.getInstance().db.collection("users").document(Firebase.getInstance().User.getId()).update("teams",Firebase.getInstance().User.getTeams());
+        Firebase.getInstance().db.collection("teams").document(team.getName()).set(team);
         finish();
     }
 
-    public void goToProfile(View view) {
-        Intent profil = new Intent(this,ProfilActivity.class);
-        startActivity(profil);
+    private void getAnnounce() {
+        Firebase.getInstance().db.collection("annonces")
+                .whereEqualTo("email", Firebase.getInstance().getUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //transformation de la map en json pour récupérer les infos du user
+                                Gson gson = new Gson();
+                                String datatoString = gson.toJson(document.getData());
+                                //Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
+                                Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
+                                Firebase.getInstance().User.setId(document.getId());
+                                //Log.d("UserId", " => " + Firebase.getInstance().User.getId());
+                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
+                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
+                            }
+                        } else {
+                            Log.d("Error", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
+
 }

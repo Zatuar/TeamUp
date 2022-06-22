@@ -2,12 +2,12 @@ package com.webstart.teamup;
 
 public class Structure_Profil_Min {
     private String name, photo;
-    private Integer id;
+    private String id;
 
     public Structure_Profil_Min() {
     }
 
-    public Structure_Profil_Min(String name, String photo, Integer id) {
+    public Structure_Profil_Min(String name, String photo, String id) {
         this.name = name;
         this.photo = photo;
         this.id = id;
@@ -30,11 +30,11 @@ public class Structure_Profil_Min {
         this.photo = photo;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 }
