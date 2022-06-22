@@ -20,13 +20,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class Firebase extends AppCompatActivity {
 
     private static final Firebase FB = new Firebase();
     boolean result;
 
     private Structure_Profil User ;
-
+    ArrayList<Structure_Team> teamsUser;
     private FirebaseUser FBuser;
     private FirebaseAuth mAuth;
 
@@ -61,6 +63,7 @@ public class Firebase extends AppCompatActivity {
     private Firebase() {
         mAuth = FirebaseAuth.getInstance();
         User = new Structure_Profil();
+        teamsUser = new ArrayList<>();
     }
 
     public boolean signIn(String e, String pw, Intent ct) {

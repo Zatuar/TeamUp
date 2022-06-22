@@ -46,6 +46,12 @@ public class TeamsListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teams_list, container, false);
@@ -79,7 +85,6 @@ public class TeamsListFragment extends Fragment {
         }
         //teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         getTeamsUser();
-        showTeams(teams);
     }
 
     private void getTeamsUser() {
@@ -97,17 +102,12 @@ public class TeamsListFragment extends Fragment {
                                 Gson gson = new Gson();
                                 String datatoString = gson.toJson(document.getData());
                                 teams.add(gson.fromJson(datatoString, Structure_Team.class));
-
                             }
                         } else {
                             Log.d("Error", "Error getting documents: ", task.getException());
                         }
                     }
                 });
-    }
-
-    private void showTeams(ArrayList<Structure_Team> teams) {
-        //
     }
 
     private void selectedTeam(Structure_Team team) {

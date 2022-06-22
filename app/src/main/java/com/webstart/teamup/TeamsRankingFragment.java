@@ -39,6 +39,12 @@ public class TeamsRankingFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
     public static TeamsRankingFragment newInstance() {
         return new TeamsRankingFragment();
     }
@@ -50,7 +56,7 @@ public class TeamsRankingFragment extends Fragment {
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
-         adapter= new TeamAdapter(teams,new ClickTeamListenner(){
+         adapter= new TeamAdapter(Firebase.getInstance().teamsUser,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Structure_Team team){
                 selectedTeam(team);
@@ -66,17 +72,7 @@ public class TeamsRankingFragment extends Fragment {
     }
 
     void getData() {
-        //appelle API
-//        ArrayList<Structure_Profil_Min> members = new ArrayList<>();
-//        ArrayList<String> annonceIds = new ArrayList<>();
-//        Structure_Jeu game = new Structure_Jeu("Jeu 1", "url", 1);;
-//        for (int i = 0; i < 5; i++) {
-//            members.add(new Structure_Profil_Min("Member "+i, "photo_url", String.valueOf(i)));
-//            annonceIds.add("Annonce #"+i);
-//        }
-//        teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         getTeams();
-        showTeams(teams);
     }
 
     private void getTeams() {
@@ -90,7 +86,7 @@ public class TeamsRankingFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
-                        teams.add(gson.fromJson(datatoString, Structure_Team.class));
+                        Firebase.getInstance().teamsUser.add(gson.fromJson(datatoString, Structure_Team.class));
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
@@ -98,10 +94,6 @@ public class TeamsRankingFragment extends Fragment {
             }
         });
 
-    }
-
-    private void showTeams(ArrayList<Structure_Team> teams) {
-        //
     }
 
     private void selectedTeam(Structure_Team team) {

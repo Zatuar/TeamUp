@@ -77,9 +77,10 @@ public class TeamCreateActivity extends AppCompatActivity {
         annonce.setTeam(team.getName());
         team.setScore(0);
         //Firebase.getInstance().db.collection("annonces").document().set(annonce);
+        Firebase.getInstance().teamsUser.add(team);
         Firebase.getInstance().getUser().getTeams().add(team.getName());
         Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getId()).update("teams",Firebase.getInstance().getUser().getTeams());
-        Firebase.getInstance().db.collection("teams").document().set(team);
+        Firebase.getInstance().db.collection("teams").document(team.getName()).set(team);
         finish();
     }
 
