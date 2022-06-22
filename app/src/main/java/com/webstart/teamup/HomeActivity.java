@@ -31,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //getUserProfil();
         white = getDrawable(R.drawable.bottom_border_white);
         orange = getDrawable(R.drawable.bottom_border_light_orange);
         menu = findViewById(R.id.home_menu);
@@ -40,7 +41,10 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getUserProfil();
+        //Log.d("HomeActivity",  " => " + Firebase.getInstance().getUser().getTeams());
+        //Log.d("UserTeamsID", " => " + Firebase.getInstance().getUser().getTeams());
+        //Log.d("UserEmail", " => " + Firebase.getInstance().getUser().getEmail());
+        //Log.d("UserPhone", " => " + Firebase.getInstance().getUser().getPhone());
     }
 
     private void setNavBar() {
@@ -75,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        menu.setSelectedItemId(R.id.teams);
+        menu.setSelectedItemId(R.id.announces);
     }
 
     @Override
@@ -85,31 +89,6 @@ public class HomeActivity extends AppCompatActivity {
         Firebase.getInstance().getmAuth().signOut();
     }
 
-    private void getUserProfil() {
-        Firebase.getInstance().db.collection("users")
-                .whereEqualTo("email", Firebase.getInstance().getUser().getEmail())
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //transformation de la map en json pour récupérer les infos du user
-                                Gson gson = new Gson();
-                                String datatoString = gson.toJson(document.getData());
-                                //Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
-                                Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
-                                Firebase.getInstance().User.setId(document.getId());
-                                //Log.d("UserTeamsID", " => " + Firebase.getInstance().User.getTeams());
-                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
-                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
-                            }
-                        } else {
-                            Log.d("Error", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-    }
 
     public void goToProfile(View view) {
         Intent profil = new Intent(this,ProfilActivity.class);
@@ -139,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
         myteam.setBackground(orange);
         ranking.setBackground(white);
         TeamsListFragment t = new TeamsListFragment();
-        t.getData();
+        //t.getData();
         getSupportFragmentManager().beginTransaction().replace(R.id.team_content,t).commit();
     }
 

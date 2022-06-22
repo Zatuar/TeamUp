@@ -25,20 +25,27 @@ public class Firebase extends AppCompatActivity {
     private static final Firebase FB = new Firebase();
     boolean result;
 
-    Structure_Profil User = new Structure_Profil();
+    private Structure_Profil User ;
 
-    private FirebaseUser user;
+    private FirebaseUser FBuser;
     private FirebaseAuth mAuth;
 
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://teamup-57580.appspot.com");
     StorageReference storageRef = storage.getReference();
     final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public FirebaseUser getUser() {
-        return user;
+    public Structure_Profil getUser() {
+        return User;
     }
-    public void setUser(FirebaseUser user) {
-        this.user = user;
+
+    public void setUser(Structure_Profil user) {
+        User = user;
+    }
+    public FirebaseUser getFBuser() {
+        return FBuser;
+    }
+    public void setFBuser(FirebaseUser FBuser) {
+        this.FBuser = FBuser;
     }
 
     public FirebaseAuth getmAuth() {
@@ -53,6 +60,7 @@ public class Firebase extends AppCompatActivity {
     }
     private Firebase() {
         mAuth = FirebaseAuth.getInstance();
+        User = new Structure_Profil();
     }
 
     public boolean signIn(String e, String pw, Intent ct) {

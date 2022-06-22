@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TeamsListFragment extends Fragment {
     ArrayList<Structure_Team> teams = new ArrayList<>();
@@ -30,6 +31,7 @@ public class TeamsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
     }
 
     @Override
@@ -71,8 +73,10 @@ public class TeamsListFragment extends Fragment {
     }
 
     private void getTeamsUser() {
+
+        Log.d("TeamsName", " => " + Firebase.getInstance().getUser().getTeams());
         Firebase.getInstance().db.collection("teams")
-                .whereArrayContains("members.name",Firebase.getInstance().User.getPseudo())
+                .whereIn("name", Arrays.asList(Firebase.getInstance().getUser().getTeams()))
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

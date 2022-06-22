@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -95,14 +92,14 @@ public class InscriptionActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("SUCESS", "createUserWithEmail:success");
-                            Firebase.getInstance().setUser(Firebase.getInstance().getmAuth().getCurrentUser());
-                            Firebase.getInstance().User.setId(Firebase.getInstance().getmAuth().getUid());
+                            Firebase.getInstance().setFBuser(Firebase.getInstance().getmAuth().getCurrentUser());
+                            Firebase.getInstance().getUser().setId(Firebase.getInstance().getmAuth().getUid());
                             profil.setId(Firebase.getInstance().getmAuth().getUid());
                             profil.setGames(new ArrayList<Structure_Jeu>());
                             profil.setAbonnements(new ArrayList<Structure_Abonnement>());
                             profil.setPictureProfil("");
                             profil.setTeams(new ArrayList<>());
-                            Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getUid()).set(profil);
+                            Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
                             startActivity(home);
                         } else {
                             Log.w("SUCESS", "createUserWithEmail:failure", task.getException());

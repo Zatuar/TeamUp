@@ -9,18 +9,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.v1.WriteResult;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -65,7 +60,7 @@ public class TeamCreateActivity extends AppCompatActivity {
 
     private void addMembers() {
         ArrayList<Structure_Profil_Min> members = new ArrayList<>();
-        members.add(new Structure_Profil_Min(Firebase.getInstance().User.getPseudo(),Firebase.getInstance().User.getPictureProfil(),Firebase.getInstance().User.getId()));
+        members.add(new Structure_Profil_Min(Firebase.getInstance().getUser().getPseudo(),Firebase.getInstance().getUser().getPictureProfil(),Firebase.getInstance().getUser().getId()));
         team.setMembers(members);
     }
 
@@ -82,15 +77,15 @@ public class TeamCreateActivity extends AppCompatActivity {
         annonce.setTeam(team.getName());
         team.setScore(0);
         //Firebase.getInstance().db.collection("annonces").document().set(annonce);
-        Firebase.getInstance().User.getTeams().add(team.getName());
-        Firebase.getInstance().db.collection("users").document(Firebase.getInstance().User.getId()).update("teams",Firebase.getInstance().User.getTeams());
+        Firebase.getInstance().getUser().getTeams().add(team.getName());
+        Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getId()).update("teams",Firebase.getInstance().getUser().getTeams());
         Firebase.getInstance().db.collection("teams").document(team.getName()).set(team);
         finish();
     }
 
     private void getAnnounce() {
         Firebase.getInstance().db.collection("annonces")
-                .whereEqualTo("email", Firebase.getInstance().getUser().getEmail())
+                .whereEqualTo("email", Firebase.getInstance().getFBuser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -101,8 +96,8 @@ public class TeamCreateActivity extends AppCompatActivity {
                                 Gson gson = new Gson();
                                 String datatoString = gson.toJson(document.getData());
                                 //Log.d("FirebaseClassTest", document.getId() + " => " + datatoString);
-                                Firebase.getInstance().User = gson.fromJson(datatoString, Structure_Profil.class);
-                                Firebase.getInstance().User.setId(document.getId());
+                                Firebase.getInstance().setUser(gson.fromJson(datatoString, Structure_Profil.class));
+                                Firebase.getInstance().getUser().setId(document.getId());
                                 //Log.d("UserId", " => " + Firebase.getInstance().User.getId());
                                 //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
                                 //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());

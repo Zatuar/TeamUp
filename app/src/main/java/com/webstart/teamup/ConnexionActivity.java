@@ -3,7 +3,6 @@ package com.webstart.teamup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +13,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
 
 public class ConnexionActivity extends AppCompatActivity {
     EditText email,password;
@@ -45,16 +45,15 @@ public class ConnexionActivity extends AppCompatActivity {
         String e,pw;
         e=email.getText().toString();
         pw=password.getText().toString();
-        Intent home = new Intent(ConnexionActivity.this,HomeActivity.class);
         if(!(e.equals("") || pw.equals(""))){
             Firebase.getInstance().getmAuth().signInWithEmailAndPassword(e, pw)
                 .addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Firebase.getInstance().setUser(Firebase.getInstance().getmAuth().getCurrentUser());
+                            Firebase.getInstance().setFBuser(Firebase.getInstance().getmAuth().getCurrentUser());
                             Log.d("Success", "signInWithEmail:success");
-                            startActivity(home);
+                            getUserProfil();
                         } else {
                             Log.w("Error", "signInWithEmail:failure", task.getException());
                             Toast.makeText(ConnexionActivity.this, "Wrong email or password",
@@ -65,6 +64,34 @@ public class ConnexionActivity extends AppCompatActivity {
         }
     }
 
+    private void getUserProfil() {
+        Intent home = new Intent(ConnexionActivity.this,HomeActivity.class);
+        Firebase.getInstance().db.collection("users")
+                .whereEqualTo("email", Firebase.getInstance().getFBuser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //transformation de la map en json pour récupérer les infos du user
+                                Gson gson = new Gson();
+                                String datatoString = gson.toJson(document.getData());
+                                Firebase.getInstance().setUser(gson.fromJson(datatoString, Structure_Profil.class));
+                                Firebase.getInstance().getUser().setId(document.getId());
+                                //Log.d("Teams", document.getId() + " => " + datatoString);
+                                //Log.d("TestGetUserTeams", document.getId() + " => " + Firebase.getInstance().getUser().getTeams());
+                                //Log.d("UserTeamsID", " => " + Firebase.getInstance().User.getTeams());
+                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
+                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
+                                startActivity(home);
+                            }
+                        } else {
+                            Log.d("Error", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
     public void goToSignUp(View view) {
         Intent signUp = new Intent(this,InscriptionActivity.class);
         startActivity(signUp);

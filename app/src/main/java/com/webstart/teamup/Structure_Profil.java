@@ -1,13 +1,8 @@
 package com.webstart.teamup;
 
-import android.util.Log;
-
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Structure_Profil {
     private String id;

@@ -37,10 +37,7 @@ public class TeamsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TeamsListFragment teams = new TeamsListFragment();
-        teams.getData();
+        //teams.getData();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.team_content, teams).commit();
-    }
-
-    public void listRanking(View view) {
     }
 }
