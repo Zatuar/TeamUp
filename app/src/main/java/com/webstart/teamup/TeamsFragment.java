@@ -20,7 +20,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class TeamsFragment extends Fragment {
+    TeamsListFragment teams = TeamsListFragment.newInstance();
+    TeamsRankingFragment ranking = TeamsRankingFragment.newInstance();
 
+    public static TeamsFragment newInstance() {
+        return new TeamsFragment();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +41,6 @@ public class TeamsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TeamsListFragment teams = new TeamsListFragment();
-        //teams.getData();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.team_content, teams).commit();
     }
 }

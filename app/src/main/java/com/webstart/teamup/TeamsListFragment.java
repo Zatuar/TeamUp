@@ -27,22 +27,33 @@ import java.util.Arrays;
 
 public class TeamsListFragment extends Fragment {
     ArrayList<Structure_Team> teams = new ArrayList<>();
+    RecyclerView teamsRV;
+    RecyclerView.Adapter<TeamAdapter.Holder> adapter;
 
+    public static TeamsListFragment newInstance() {
+        return new TeamsListFragment();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData();
+        //getData();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teams_list, container, false);
-        RecyclerView teamsRV = view.findViewById(R.id.rv_tl);
+        teamsRV= view.findViewById(R.id.rv_tl);
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
-        RecyclerView.Adapter<TeamAdapter.Holder> adapter = new TeamAdapter(teams,new ClickTeamListenner(){
+        adapter = new TeamAdapter(teams,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Structure_Team team){
                 selectedTeam(team);
@@ -66,7 +77,7 @@ public class TeamsListFragment extends Fragment {
             members.add(new Structure_Profil_Min("Member "+i, "photo_url", String.valueOf(i)));
             annonceIds.add("Annonce #"+i);
         }
-        teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
+        //teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         getTeamsUser();
         showTeams(teams);
     }
@@ -75,7 +86,7 @@ public class TeamsListFragment extends Fragment {
 
         Log.d("TeamsName", " => " + Firebase.getInstance().getUser().getTeams());
         Firebase.getInstance().db.collection("teams")
-                .whereIn("name", Arrays.asList(Firebase.getInstance().getUser().getTeams()))
+                .whereIn("name", Firebase.getInstance().getUser().getTeams())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -85,7 +96,8 @@ public class TeamsListFragment extends Fragment {
                                 //transformation de la map en json pour récupérer les infos du user
                                 Gson gson = new Gson();
                                 String datatoString = gson.toJson(document.getData());
-                                Log.d("FirebaseTeams", document.getId() + " => " + datatoString);
+                                teams.add(gson.fromJson(datatoString, Structure_Team.class));
+
                             }
                         } else {
                             Log.d("Error", "Error getting documents: ", task.getException());

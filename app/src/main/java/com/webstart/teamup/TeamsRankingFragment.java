@@ -26,11 +26,21 @@ import java.util.ArrayList;
 
 public class TeamsRankingFragment extends Fragment {
     ArrayList<Structure_Team> teams = new ArrayList<>();
-
+    RecyclerView.Adapter<TeamAdapter.Holder> adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData();
+        //getData();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
+    }
+
+    public static TeamsRankingFragment newInstance() {
+        return new TeamsRankingFragment();
     }
 
     @Override
@@ -40,7 +50,7 @@ public class TeamsRankingFragment extends Fragment {
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
-        RecyclerView.Adapter<TeamAdapter.Holder> adapter = new TeamAdapter(teams,new ClickTeamListenner(){
+         adapter= new TeamAdapter(teams,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Structure_Team team){
                 selectedTeam(team);
@@ -56,6 +66,15 @@ public class TeamsRankingFragment extends Fragment {
     }
 
     void getData() {
+        //appelle API
+//        ArrayList<Structure_Profil_Min> members = new ArrayList<>();
+//        ArrayList<String> annonceIds = new ArrayList<>();
+//        Structure_Jeu game = new Structure_Jeu("Jeu 1", "url", 1);;
+//        for (int i = 0; i < 5; i++) {
+//            members.add(new Structure_Profil_Min("Member "+i, "photo_url", String.valueOf(i)));
+//            annonceIds.add("Annonce #"+i);
+//        }
+//        teams.add(new Structure_Team("Team A", "url_logo", "description", String.valueOf(1), 1000, 1, members, game, annonceIds));
         getTeams();
         showTeams(teams);
     }

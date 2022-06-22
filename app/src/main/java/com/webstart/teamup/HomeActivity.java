@@ -25,6 +25,8 @@ public class HomeActivity extends AppCompatActivity {
 
     Drawable white;
     Drawable orange;
+    TeamsFragment tf = TeamsFragment.newInstance();
+
 
     BottomNavigationView menu;
     @Override
@@ -35,16 +37,10 @@ public class HomeActivity extends AppCompatActivity {
         white = getDrawable(R.drawable.bottom_border_white);
         orange = getDrawable(R.drawable.bottom_border_light_orange);
         menu = findViewById(R.id.home_menu);
-        setNavBar();
-    }
+        tf.ranking.getData();
+        tf.teams.getData();
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Log.d("HomeActivity",  " => " + Firebase.getInstance().getUser().getTeams());
-        //Log.d("UserTeamsID", " => " + Firebase.getInstance().getUser().getTeams());
-        //Log.d("UserEmail", " => " + Firebase.getInstance().getUser().getEmail());
-        //Log.d("UserPhone", " => " + Firebase.getInstance().getUser().getPhone());
+        setNavBar();
     }
 
     private void setNavBar() {
@@ -59,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.teams:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content,new TeamsFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.home_content,tf).commit();
                         return true;
 
                     case R.id.tournaments:
@@ -79,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-        menu.setSelectedItemId(R.id.announces);
+        menu.setSelectedItemId(R.id.teams);
     }
 
     @Override
@@ -104,12 +100,11 @@ public class HomeActivity extends AppCompatActivity {
     public void listRanking(View view) {
         TextView myteam = findViewById(R.id.my_teams);
         TextView ranking = findViewById(R.id.ranking);
-        //myteam.setBackground(Drawable.createFromPath(String.valueOf(R.drawable.bottom_border_white)));
         myteam.setBackground(white);
         ranking.setBackground(orange);
         TeamsRankingFragment t = new TeamsRankingFragment();
-        t.getData();
-        getSupportFragmentManager().beginTransaction().replace(R.id.team_content, t).commit();
+        //t.getData();
+        getSupportFragmentManager().beginTransaction().replace(R.id.team_content, tf.ranking).commit();
     }
 
     public void listMyTeams(View view) {
@@ -119,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         ranking.setBackground(white);
         TeamsListFragment t = new TeamsListFragment();
         //t.getData();
-        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,t).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,tf.teams).commit();
     }
 
 }
