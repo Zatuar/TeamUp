@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class AnnouncementFragment extends Fragment {
@@ -40,7 +42,10 @@ public class AnnouncementFragment extends Fragment {
     }
 
     private void selectedAnnonce(Structure_Annonce annonce) {
-        Intent selectedAnnonce = new Intent(getContext(),AnnouncementActivity.class);
+        Intent selectedAnnonce = new Intent(getContext(), AnnouncementActivity.class);
+        Gson gson = new Gson();
+        String annonceToString = gson.toJson(annonce);
+        selectedAnnonce.putExtra("annonce", annonceToString);
         startActivity(selectedAnnonce);
     }
 
@@ -64,6 +69,6 @@ public class AnnouncementFragment extends Fragment {
     }
 
     private void showAnnonce(ArrayList<Structure_Annonce> annonces) {
-        //
+
     }
 }
