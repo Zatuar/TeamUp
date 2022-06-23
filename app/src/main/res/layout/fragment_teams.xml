@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeamsFragment"
+    tools:context=".fragments.team.TeamsFragment"
     android:id="@+id/teams_container"
     android:background="@color/light_purple">
 

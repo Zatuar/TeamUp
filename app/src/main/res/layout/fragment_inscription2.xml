@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Inscription2Fragment"
+    tools:context=".fragments.signup.Inscription2Fragment"
     android:background="@color/light_purple" >
 
     <LinearLayout
