@@ -19,6 +19,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.webstart.teamup.models.Profil;
+import com.webstart.teamup.models.Team;
 
 import java.util.ArrayList;
 
@@ -27,20 +29,20 @@ public class Firebase extends AppCompatActivity {
     private static final Firebase FB = new Firebase();
     boolean result;
 
-    private Structure_Profil User ;
-    ArrayList<Structure_Team> teamsUser;
+    private Profil User ;
+    public ArrayList<Team> teamsUser;
     private FirebaseUser FBuser;
     private FirebaseAuth mAuth;
 
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://teamup-57580.appspot.com");
     StorageReference storageRef = storage.getReference();
-    final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    public final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public Structure_Profil getUser() {
+    public Profil getUser() {
         return User;
     }
 
-    public void setUser(Structure_Profil user) {
+    public void setUser(Profil user) {
         User = user;
     }
     public FirebaseUser getFBuser() {
@@ -62,7 +64,7 @@ public class Firebase extends AppCompatActivity {
     }
     private Firebase() {
         mAuth = FirebaseAuth.getInstance();
-        User = new Structure_Profil();
+        User = new Profil();
         teamsUser = new ArrayList<>();
     }
 
