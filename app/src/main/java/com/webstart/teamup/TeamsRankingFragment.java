@@ -30,18 +30,19 @@ public class TeamsRankingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getData();
     }
-
+/*
     @Override
     public void onStart() {
         super.onStart();
         adapter.notifyDataSetChanged();
     }
-
+*/
     @Override
     public void onResume() {
         super.onResume();
+        teams.clear();
+        getTeams();
         adapter.notifyDataSetChanged();
     }
 
@@ -56,7 +57,7 @@ public class TeamsRankingFragment extends Fragment {
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
-         adapter= new TeamAdapter(Firebase.getInstance().teamsUser,new ClickTeamListenner(){
+         adapter= new TeamAdapter(teams,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Structure_Team team){
                 selectedTeam(team);
@@ -86,7 +87,7 @@ public class TeamsRankingFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
-                        Firebase.getInstance().teamsUser.add(gson.fromJson(datatoString, Structure_Team.class));
+                        teams.add(gson.fromJson(datatoString, Structure_Team.class));
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());

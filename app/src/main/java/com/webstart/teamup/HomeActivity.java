@@ -102,8 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         TextView ranking = findViewById(R.id.ranking);
         myteam.setBackground(white);
         ranking.setBackground(orange);
-        TeamsRankingFragment t = new TeamsRankingFragment();
-        //t.getData();
         getSupportFragmentManager().beginTransaction().replace(R.id.team_content, tf.ranking).commit();
     }
 
@@ -112,8 +110,6 @@ public class HomeActivity extends AppCompatActivity {
         TextView ranking = findViewById(R.id.ranking);
         myteam.setBackground(orange);
         ranking.setBackground(white);
-        TeamsListFragment t = new TeamsListFragment();
-        //t.getData();
         getSupportFragmentManager().beginTransaction().replace(R.id.team_content,tf.teams).commit();
     }
 
