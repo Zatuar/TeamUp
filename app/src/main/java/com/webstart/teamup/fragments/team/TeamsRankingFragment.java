@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
@@ -87,6 +88,7 @@ public class TeamsRankingFragment extends Fragment {
 
     private void getTeams() {
         Firebase.getInstance().db.collection("teams")
+        .whereGreaterThan("rank", "0")
         .orderBy("rank")
         .get()
         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

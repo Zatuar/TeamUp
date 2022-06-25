@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.webstart.teamup.activities.money.SbuscriptionActivity;
+import com.webstart.teamup.activities.money.SubscriptionActivity;
 import com.webstart.teamup.activities.money.ShopActivity;
 import com.webstart.teamup.activities.profile.ProfilActivity;
 import com.webstart.teamup.activities.teams.TeamCreateActivity;
@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         white = getDrawable(R.drawable.bottom_border_white);
-        orange = getDrawable(R.drawable.bottom_border_light_orange);
+        orange = getDrawable(R.drawable.bottom_border_light_orange_bg_light_purple);
         menu = findViewById(R.id.home_menu);
         tf.ranking.getData();
         tf.teams.getData();
@@ -122,7 +122,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(shop);
     }
     public void goToSubscriptions(View view) {
-        Intent sub =new Intent(this, SbuscriptionActivity.class);
+        Intent sub =new Intent(this, SubscriptionActivity.class);
         startActivity(sub);
     }
     public void goToFeatures(View view) {
