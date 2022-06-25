@@ -3,57 +3,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inscription3Fragment">
+    tools:context=".fragments.signup.Inscription3Fragment"
+    android:background="@color/light_purple" >
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
-        android:layout_gravity="center" />
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/logo_alt"
+        android:src="@drawable/logo" />
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TeamUp"
+        android:fontFamily="@font/sora"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="34sp"
         android:layout_gravity="center" />
+
     <TextView
-        android:id="@+id/description1"
-        android:layout_width="wrap_content"
+        android:id="@+id/selectGames"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Sélectionner un ou plusieurs jeux\n à ajouter à votre liste"
         android:layout_gravity="center"
-        android:textAlignment="center"/>
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/sora"
+        android:text="@string/select_games"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
     <EditText
-        android:id="@+id/edit_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nom du jeu" />
+        android:id="@+id/edit_game"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/sora"
+        android:inputType="textEmailAddress"
+        android:hint="@string/select_game_placeholder"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/white"
+        android:autofillHints="name"/>
+
     <Button
         android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center"
-        android:text="Ajouter"
+        android:text="@string/add"
+        android:backgroundTint="@color/light_orange"
         android:onClick="addGame" />
     <TextView
         android:id="@+id/description2"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Vos jeux" />
+        android:layout_marginTop="28dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/saira_semi_condensed_regular"
+        android:text="@string/your_games"
+        android:textColor="@color/white"
+        android:textSize="26sp"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
     <Button
         android:id="@+id/inscription_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center"
-        android:text="Terminer" />
-
+        android:text="@string/finish"
+        android:backgroundTint="@color/light_orange"
+        android:onClick="goToHome"/>
 </LinearLayout>
-
 </FrameLayout>

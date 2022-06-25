@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InscriptionActivity">
+    tools:context=".activities.auth.InscriptionActivity"
+    android:background="@color/light_purple" >
+
     <FrameLayout
         android:id="@+id/fragment_inscription"
         android:layout_width="wrap_content"
@@ -12,7 +14,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
-
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

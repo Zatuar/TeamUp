@@ -4,28 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    tools:context=".activities.HomeActivity"
+    android:background="@color/light_purple">
+
+    <LinearLayout
+        android:id="@+id/home_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="right"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:background="@color/medium_purple">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_notifications_24"
+            android:background="@drawable/round_button_white_borders"
+            android:layout_marginRight="14dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_face_24"
+            android:background="@drawable/round_button_white_borders"
+            android:onClick="goToProfile"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/home_header_separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
         android:layout_gravity="center"
-        android:text="TeamUp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/home_header"/>
     <FrameLayout
         android:id="@+id/home_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintTop_toBottomOf="@id/home_header_separator"
+        android:paddingBottom="100dp"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/home_menu"
+        android:background="@color/dark_purple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/home_bottom_menu" />
+        app:menu="@menu/home_bottom_menu"
+        app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

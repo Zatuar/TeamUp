@@ -3,53 +3,90 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeamsFragment">
+    tools:context=".fragments.team.TeamsFragment"
+    android:id="@+id/teams_container"
+    android:background="@color/light_purple">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Mes équipes" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_gravity="center"
-            android:background="?android:attr/listDivider" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/my_teams"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Mes équipes" />
+                android:layout_weight="1"
+                android:background="@drawable/bottom_border_light_orange"
+                android:paddingLeft="5dp"
+                android:text="@string/my_teams"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:paddingVertical="6dp"
+                android:onClick="listMyTeams"/>
+
             <TextView
                 android:id="@+id/ranking"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Ranking" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/logo" />
+                android:layout_weight="1"
+                android:background="@drawable/bottom_border_white"
+                android:paddingLeft="10dp"
+                android:text="@string/ranking"
+                android:textColor="@color/gray"
+                android:textSize="24dp"
+                android:paddingVertical="6dp"
+                android:onClick="listRanking"/>
         </LinearLayout>
-        <FrameLayout
-            android:id="@+id/team_content"
+
+        <!--   Filter     -->
+        <LinearLayout
+            android:id="@+id/teams_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        android:background="@color/light_purple"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="5dp"
+                        android:text="Tout"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:gravity="top"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--    Teams    -->
+        <FrameLayout
+            android:id="@+id/team_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         </FrameLayout>
     </LinearLayout>
-
 </FrameLayout>

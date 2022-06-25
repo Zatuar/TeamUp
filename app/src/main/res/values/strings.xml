@@ -1,6 +1,43 @@
 <resources>
     <string name="app_name">TeamUp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="logo_alt">TeamUp logo</string>
+    <string name="login">Se connecter</string>
+    <string name="mail_placeholder">Adresse email</string>
+    <string name="password_placeholder">Mot de passe</string>
+    <string name="phone_placeholder">Numéro de téléphone</string>
+    <string name="next">Suivant</string>
+    <string name="profile">Profil</string>
+    <string name="name_placeholder">Pseudo</string>
+    <string name="description_placeholder">Description</string>
+    <string name="select_games">Sélectionnez un ou plusieurs jeux à ajouter à votre liste</string>
+    <string name="select_game_placeholder">Nom du jeu</string>
+    <string name="add">Ajouter</string>
+    <string name="your_games">Vos jeux</string>
+    <string name="finish">Terminer</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+    <string name="connect_with_google">Se connecter avec Google</string>
+    <string name="no_account">Pas de compte ?</string>
+    <string name="sign_up">Inscrivez-vous</string>
+    <string name="nav_teams">Équipes</string>
+    <string name="nav_tournaments">Tournois</string>
+    <string name="nav_team_chat">Chat</string>
+    <string name="nav_shop">Boutique</string>
+    <string name="nav_announces">Annonces</string>
+    <string name="my_teams">Mes équipes</string>
+    <string name="ranking">Ranking</string>
+    <string name="shop">Boutique</string>
+    <string name="subscription">Abonnements</string>
+    <string name="features">Fonctionnalitées</string>
+    <string name="others">Divers</string>
+    <string name="comming_soon">A venir</string>
+    <string name="create_team_name">Nom de l\'équipe</string>
+    <string name="create_team">Création</string>
+    <string name="create_team_description">Description</string>
+    <string name="create_team_game">Jeu</string>
+    <string name="create_team_members">Joueurs</string>
+    <string name="create_team_members_placeholder">Pseudo du joueur</string>
+    <string name="create_annonce">Créer une annonce</string>
+    <string name="create_annonce_title_placeholder">Titre de l\'annonce</string>
+    <string name="create_annonce_body_placeholder">Message de l\'annonce</string>
+    <string name="edit">Modifier</string>
 </resources>
