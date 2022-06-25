@@ -100,13 +100,14 @@
                     android:textSize="20dp" />
 
                 <Button
+                    android:id="@+id/see_applications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:backgroundTint="@color/medium_purple"
                     android:text="Candidatures"
-                    android:textSize="10dp"
-                    android:textColor="@color/white"/>
+                    android:textColor="@color/white"
+                    android:textSize="10dp" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

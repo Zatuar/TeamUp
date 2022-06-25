@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.webstart.teamup.Firebase;
 import com.webstart.teamup.R;
 import com.webstart.teamup.activities.profile.ProfilActivity;
 import com.webstart.teamup.adapters.team.TeamMemberAdapter;
@@ -51,6 +53,10 @@ public class TeamActivity extends AppCompatActivity {
         team_score.setText("("+team.getScore()+"pts)");
         TextView team_name = findViewById(R.id.team_name);
         team_name.setText(team.getName());
+
+        if (!team.getMembers().get(0).getId().equals(Firebase.getInstance().getUser().getId())){
+            findViewById(R.id.see_applications).setVisibility(View.INVISIBLE);
+        }
     }
 
     public void goToProfile(View view) {
