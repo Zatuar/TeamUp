@@ -3,12 +3,12 @@ package com.webstart.teamup.models;
 import java.util.ArrayList;
 
 public class Team {
-    private String name, logo, description;
-    private String id;
+    private String name, logo, description,id;
     private Integer score;
     private Integer rank;
     private ArrayList<ProfilMin> members;
     private Jeu game;
+    private String chatID;
     private ArrayList<String> annonceIds;
 
     public Team() {
@@ -81,6 +81,15 @@ public class Team {
     public void setGame(Jeu game) {
         this.game = game;
     }
+
+    public String getChatID() {
+        return chatID;
+    }
+
+    public void setChatID(String chatID) {
+        this.chatID = chatID;
+    }
+
 
     public ArrayList<String> getAnnonceIds() {
         return annonceIds;

@@ -74,13 +74,32 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:layout_marginTop="16dp"/>
-            <EditText
-                android:id="@+id/team_member"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/create_team_members_placeholder"
-                android:backgroundTint="@color/white"
-                android:textColorHint="@color/white"/>
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/team_member"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="100"
+                    android:inputType="text"
+                    android:hint="@string/create_team_members_placeholder"
+                    android:backgroundTint="@color/white"
+                    android:textColorHint="@color/white" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="50"
+                    android:text="Ajouter"
+                    android:onClick="addMates"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/added_mates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button

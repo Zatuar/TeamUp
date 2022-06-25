@@ -27,7 +27,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/round_button"
-            android:backgroundTint="@color/medium_purple"
+            android:backgroundTint="@color/light_orange"
             android:onClick="createTeamForm"
             android:rotation="45"
             android:src="@drawable/ic_baseline_close_24" />

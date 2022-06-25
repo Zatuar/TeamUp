@@ -63,8 +63,6 @@ public class InscriptionActivity extends AppCompatActivity {
                     pw = verifpw.getText().toString();
                     profil.setEmail(verifemail.getText().toString());
                     profil.setPhone(verifphone.getText().toString());
-                    //Log.i("ProfilE", profil.getEmail());
-                    //Log.i("ProfilP", profil.getPhone());
                     transaction.replace(R.id.fragment_inscription, Inscription2Fragment.class, null, "Page 2");
                     transaction.setReorderingAllowed(true);
                     transaction.addToBackStack("Page 1");
@@ -92,31 +90,38 @@ public class InscriptionActivity extends AppCompatActivity {
 
     public void goToHome(View view) {
         EditText selectGame = findViewById(R.id.edit_game);
-        Intent home = new Intent(this, HomeActivity.class);
-        //Log.i("Verif",(profil.getEmail()+" "+ pw));
         if(!selectGame.getText().toString().equals("")) {
-            Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
+            signUp();
+        }
+    }
+
+    private void signUp() {
+        Intent home = new Intent(this, HomeActivity.class);
+        Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
                 .addOnCompleteListener(InscriptionActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("SUCESS", "createUserWithEmail:success");
+                            //Stocker le FireBase User
                             Firebase.getInstance().setFBuser(Firebase.getInstance().getmAuth().getCurrentUser());
-                            Firebase.getInstance().getUser().setId(Firebase.getInstance().getmAuth().getUid());
+                            //stocker les infos saisie du User
                             profil.setId(Firebase.getInstance().getmAuth().getUid());
                             profil.setGames(new ArrayList<Jeu>());
                             profil.setAbonnements(new ArrayList<Abonnement>());
                             profil.setPictureProfil("");
                             profil.setTeams(new ArrayList<>());
+                            //Stocker dans Firebase des infos du User
                             Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
+                            //Passer des infos du User en global
+                            Firebase.getInstance().setUser(profil);
                             startActivity(home);
                         } else {
                             Log.w("SUCESS", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(InscriptionActivity.this, "Authentication failed.",
+                            Toast.makeText(InscriptionActivity.this, "addresse e-mail déjà utilisé",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-        }
     }
 }

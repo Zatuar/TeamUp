@@ -21,6 +21,8 @@ import com.webstart.teamup.R;
 import com.webstart.teamup.activities.HomeActivity;
 import com.webstart.teamup.models.Profil;
 
+import java.util.ArrayList;
+
 public class ConnexionActivity extends AppCompatActivity {
     EditText email,password;
 
@@ -83,11 +85,8 @@ public class ConnexionActivity extends AppCompatActivity {
                                 String datatoString = gson.toJson(document.getData());
                                 Firebase.getInstance().setUser(gson.fromJson(datatoString, Profil.class));
                                 Firebase.getInstance().getUser().setId(document.getId());
-                                //Log.d("Teams", document.getId() + " => " + datatoString);
-                                //Log.d("TestGetUserTeams", document.getId() + " => " + Firebase.getInstance().getUser().getTeams());
-                                //Log.d("UserTeamsID", " => " + Firebase.getInstance().User.getTeams());
-                                //Log.d("UserEmail", " => " + Firebase.getInstance().User.getEmail());
-                                //Log.d("UserPhone", " => " + Firebase.getInstance().User.getPhone());
+                                if(Firebase.getInstance().getUser().getTeams()==null) Firebase.getInstance().getUser().setTeams(new ArrayList<>());
+                                //go to Home Page
                                 startActivity(home);
                             }
                         } else {

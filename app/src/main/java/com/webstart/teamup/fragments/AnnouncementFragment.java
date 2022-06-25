@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.webstart.teamup.R;
 import com.webstart.teamup.activities.AnnouncementActivity;
 import com.webstart.teamup.adapters.AnnonceAdapter;
+import com.webstart.teamup.fragments.team.TeamsFragment;
 import com.webstart.teamup.interfaces.ClickAnnonceListener;
 import com.webstart.teamup.models.Annonce;
 import com.webstart.teamup.models.Jeu;
@@ -26,9 +27,18 @@ import java.util.ArrayList;
 public class AnnouncementFragment extends Fragment {
     private ArrayList<Annonce> annonces = new ArrayList<>();
 
+    public static AnnouncementFragment newInstance() {
+        return new AnnouncementFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override

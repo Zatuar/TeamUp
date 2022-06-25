@@ -21,9 +21,8 @@ public class ShopFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ShopFragment newInstance(String param1, String param2) {
-        ShopFragment fragment = new ShopFragment();
-        return fragment;
+    public static ShopFragment newInstance() {
+        return new ShopFragment();
     }
 
     @Override
@@ -38,15 +37,4 @@ public class ShopFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_shop, container, false);
     }
 
-    public void goToSponsored(View view) {
-    }
-
-    public void goToSubscriptions(View view) {
-    }
-
-    public void goToFeatures(View view) {
-    }
-
-    public void goToOthers(View view) {
-    }
 }

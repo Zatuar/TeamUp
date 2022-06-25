@@ -25,8 +25,12 @@ import com.webstart.teamup.activities.teams.TeamActivity;
 import com.webstart.teamup.adapters.team.TeamAdapter;
 import com.webstart.teamup.interfaces.ClickTeamListenner;
 import com.webstart.teamup.models.Team;
+import com.webstart.teamup.operators.sortTeams;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TeamsRankingFragment extends Fragment {
     ArrayList<Team> teams = new ArrayList<>();
@@ -46,6 +50,8 @@ public class TeamsRankingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //teams.clear();
+        //getData();
         adapter.notifyDataSetChanged();
     }
 
@@ -60,7 +66,7 @@ public class TeamsRankingFragment extends Fragment {
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
-         adapter= new TeamAdapter(Firebase.getInstance().teamsUser,new ClickTeamListenner(){
+         adapter= new TeamAdapter(teams,new ClickTeamListenner(){
             @Override
             public void onTeamClick(Team team){
                 selectedTeam(team);
@@ -90,7 +96,7 @@ public class TeamsRankingFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
-                        Firebase.getInstance().teamsUser.add(gson.fromJson(datatoString, Team.class));
+                        teams.add(gson.fromJson(datatoString, Team.class));
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());

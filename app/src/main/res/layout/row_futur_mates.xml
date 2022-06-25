@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/medium_purple">
+    <TextView
+        android:id="@+id/futur_name_member"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="pseudo"
+        android:layout_gravity="center"/>
+    <ImageView
+        android:id="@+id/remove_mate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/medium_purple"
+        android:src="@drawable/ic_baseline_close_24" />
+
+</LinearLayout>
