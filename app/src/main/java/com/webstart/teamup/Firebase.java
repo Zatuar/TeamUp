@@ -53,6 +53,7 @@ public class Firebase extends AppCompatActivity {
     public ArrayList<Team> teamsUser = new ArrayList<>();
 
     FirebaseStorage storage = FirebaseStorage.getInstance("gs://teamup-57580.appspot.com");
-    StorageReference storageRef = storage.getReference();
+    StorageReference pictureProfil = storage.getReference().child("pictureProfil");
+    //StorageReference pictureTeam = storage.getReference().
 
 }

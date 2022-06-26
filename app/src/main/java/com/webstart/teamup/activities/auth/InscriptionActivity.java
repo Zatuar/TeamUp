@@ -1,19 +1,28 @@
 package com.webstart.teamup.activities.auth;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.AuthResult;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.activities.HomeActivity;
@@ -25,15 +34,20 @@ import com.webstart.teamup.models.Abonnement;
 import com.webstart.teamup.models.Jeu;
 import com.webstart.teamup.models.Profil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InscriptionActivity extends AppCompatActivity {
+    int SELECT_PICTURE = 200;
+
     FragmentManager manager;
     FragmentTransaction transaction;
     Profil profil = new Profil();
     String pw;
     String games;
 
+    ShapeableImageView selectedImage;
+    Bitmap bitmap=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +106,25 @@ public class InscriptionActivity extends AppCompatActivity {
         EditText selectGame = findViewById(R.id.edit_game);
         if(!selectGame.getText().toString().equals("")) {
             signUp();
+        }
+    }
+
+    public void selectPictureProfil(View view) {
+        selectedImage = findViewById(R.id.profil);
+        Intent selector = new Intent(Intent.ACTION_GET_CONTENT);
+        selector.setType("image/*");
+        startActivityForResult(Intent.createChooser(selector, "Select Picture"), SELECT_PICTURE);/**/
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    selectedImage.setImageURI(selectedImageUri);
+                }
+            }
         }
     }
 

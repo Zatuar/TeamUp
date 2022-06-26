@@ -6,10 +6,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +38,8 @@ import com.webstart.teamup.models.Team;
 import java.util.ArrayList;
 
 public class TeamCreateActivity extends AppCompatActivity {
+    int SELECT_PICTURE = 200;
+
     FragmentManager manager;
     FragmentTransaction transaction;
     Team team = new Team();
@@ -43,6 +48,7 @@ public class TeamCreateActivity extends AppCompatActivity {
     Annonce annonce = null;
     Profil temp;
     TeamCreate1Fragment tc1;
+    ImageButton logoTeam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,12 +109,17 @@ public class TeamCreateActivity extends AppCompatActivity {
         Spinner team_game = findViewById(R.id.team_game);
         EditText team_member = findViewById(R.id.team_member);
         EditText team_bio = findViewById(R.id.team_description);
+        logoTeam = findViewById(R.id.team_logo);
         if (!team_name.getText().toString().equals("")) {
             game.setName(team_game.getSelectedItem().toString());
             team.setName(team_name.getText().toString());
             team.setDescription(team_bio.getText().toString());
             team.setGame(game);
-            team.setMembers(tc1.mates);
+            team.setMembers(tc1.mates);/*
+            if(!logoTeam.getDrawable().equals(getResources().getDrawable(R.drawable.ic_baseline_add_a_photo_24))) {
+                //team.setLogo(logoTeam.toString());
+                logoTeam.getDrawable();
+            }*/
             transaction.replace(R.id.fragment_team_create, TeamCreate2Fragment.class, null, "Page 2");
             transaction.setReorderingAllowed(true);
             transaction.addToBackStack("Page 1");
@@ -116,6 +127,25 @@ public class TeamCreateActivity extends AppCompatActivity {
         }
     }
 
+    public void selectPictureTeam(View view) {
+        logoTeam = findViewById(R.id.team_logo);
+        Intent selector = new Intent(Intent.ACTION_GET_CONTENT);
+        selector.setType("image/*");
+        startActivityForResult(Intent.createChooser(selector, "Select Picture"), SELECT_PICTURE);/**/
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    Log.d("Success",selectedImageUri.toString());
+                    logoTeam.setImageURI(selectedImageUri);
+                }
+            }
+        }
+    }
     public void goToProfile(View view) {
         Intent profil = new Intent(this, ProfilActivity.class);
         startActivity(profil);
@@ -139,6 +169,28 @@ public class TeamCreateActivity extends AppCompatActivity {
             actionForTeam();
         }
         finish();
+    }
+
+    private void actionForAnnonce() {
+        Firebase.getInstance().db.collection("annonces").add(annonce)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Success", "DocumentSnapshot written with ID: " + documentReference.getId());
+                        annonce.setId(documentReference.getId());
+                        //Update Annonce
+                        Firebase.getInstance().db.collection("annonces").document(annonce.getId()).update("id",annonce.getId());
+                        //recupération de l'ID de l'annonce
+                        team.getAnnonceIds().add(annonce.getId());
+                        actionForTeam();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Error", "Error adding document", e);
+                    }
+                });
     }
 
     private void actionForTeam() {
@@ -173,26 +225,5 @@ public class TeamCreateActivity extends AppCompatActivity {
                 });
     }
 
-    private void actionForAnnonce() {
-        Firebase.getInstance().db.collection("annonces").add(annonce)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Success", "DocumentSnapshot written with ID: " + documentReference.getId());
-                        annonce.setId(documentReference.getId());
-                        //Update Annonce
-                        Firebase.getInstance().db.collection("annonces").document(annonce.getId()).update("id",annonce.getId());
-                        //recupération de l'ID de l'annonce
-                        team.getAnnonceIds().add(annonce.getId());
-                        actionForTeam();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Error", "Error adding document", e);
-                    }
-                });
-    }
 
 }

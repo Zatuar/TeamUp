@@ -87,7 +87,7 @@ public class TeamsListFragment extends Fragment {
 
     private void getTeamsUser() {
         Firebase.getInstance().db.collection("teams")
-                .whereIn("name", Firebase.getInstance().getUser().getTeams())
+                .whereIn("id", Firebase.getInstance().getUser().getTeams())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

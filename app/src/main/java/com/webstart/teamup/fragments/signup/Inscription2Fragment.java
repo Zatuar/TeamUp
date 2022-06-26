@@ -38,6 +38,4 @@ public class Inscription2Fragment extends Fragment {
         return inflater.inflate(R.layout.fragment_inscription2, container, false);
     }
 
-    public void selectPictureProfil(View view) {
-    }
 }
