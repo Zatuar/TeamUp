@@ -21,9 +21,13 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.activities.HomeActivity;
 import com.webstart.teamup.fragments.signup.Inscription1Fragment;
@@ -45,9 +49,9 @@ public class InscriptionActivity extends AppCompatActivity {
     Profil profil = new Profil();
     String pw;
     String games;
+    Uri selectedImageUri = null;
 
     ShapeableImageView selectedImage;
-    Bitmap bitmap=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,9 +124,10 @@ public class InscriptionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
+                if (data.getData() != null) {
+                    selectedImageUri = data.getData();
                     selectedImage.setImageURI(selectedImageUri);
+                    //profil.setPictureProfil(selectedImageUri.getLastPathSegment());
                 }
             }
         }
@@ -142,13 +147,41 @@ public class InscriptionActivity extends AppCompatActivity {
                             profil.setId(Firebase.getInstance().getmAuth().getUid());
                             profil.setGames(new ArrayList<Jeu>());
                             profil.setAbonnements(new ArrayList<Abonnement>());
-                            profil.setPictureProfil("");
+                            //profil.setPictureProfil("");
                             profil.setTeams(new ArrayList<>());
                             //Stocker dans Firebase des infos du User
-                            Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
-                            //Passer des infos du User en global
-                            Firebase.getInstance().setUser(profil);
-                            startActivity(home);
+                            if(selectedImageUri != null){
+                                StorageReference pictureProfil = Firebase.getInstance().storage.getReference().child("pictureProfil/"+profil.getId());
+                                UploadTask uploadTask = pictureProfil.putFile(selectedImageUri);
+
+                                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Uri> task) {
+                                                String uploadedImageUrl = task.getResult().toString();
+                                                profil.setPictureProfil(uploadedImageUrl);
+                                                Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
+                                                //Passer des infos du User en global
+                                                Firebase.getInstance().setUser(profil);
+                                                startActivity(home);
+                                            }
+                                        });
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(InscriptionActivity.this, "Failed to Upload Image", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                            else{
+                                Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
+                                //Passer des infos du User en global
+                                Firebase.getInstance().setUser(profil);
+                                startActivity(home);
+                            }
                         } else {
                             Log.w("SUCESS", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(InscriptionActivity.this, "addresse e-mail déjà utilisé",
