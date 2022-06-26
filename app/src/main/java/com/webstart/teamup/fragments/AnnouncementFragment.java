@@ -3,15 +3,22 @@ package com.webstart.teamup.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+import com.webstart.teamup.Firebase;
 import com.webstart.teamup.R;
 import com.webstart.teamup.activities.AnnouncementActivity;
 import com.webstart.teamup.adapters.AnnonceAdapter;
@@ -68,22 +75,29 @@ public class AnnouncementFragment extends Fragment {
     }
 
     public void getData() {
-        Team team;
-        ArrayList<ProfilMin> members = new ArrayList<>();
-        Jeu game;
-        ArrayList<String> annonceIds = new ArrayList<>();
+        getAnnounces();
+    }
 
-        for (int i = 0; i < 3; i++) {
-            members.add(new ProfilMin("Membre #"+1, "", String.valueOf(i)));
-            annonceIds.add("Annonce #"+i);
-        }
+    private void getAnnounces() {
+        Firebase.getInstance().db.collection("annonces")
+        .get()
+        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Gson gson = new Gson();
+                        String datatoString = gson.toJson(document.getData());
+                        annonces.add(gson.fromJson(datatoString, Annonce.class));
+                        Log.i("Annonce 0", ""+annonces.get(0));
+                    }
+                } else {
+                    Log.d("Error", "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
-        for (int i = 0; i < 5; i++) {
-            game = new Jeu("Jeu #"+1, "", i);
-            team = new Team("Team #"+i, "", "description", String.valueOf(i), i*10, i, members, game, annonceIds);
-            annonces.add(new Annonce("Annonce #"+i, "Lorem ipsum dolor sit amet", String.valueOf(i), team.getName()));
-        }
-        showAnnonce(annonces);
+        Log.i("Test", "Ici");
     }
 
     private void showAnnonce(ArrayList<Annonce> annonces) {
