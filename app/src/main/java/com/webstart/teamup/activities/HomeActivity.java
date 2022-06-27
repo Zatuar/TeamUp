@@ -5,10 +5,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.squareup.picasso.Picasso;
 import com.webstart.teamup.activities.money.SubscriptionActivity;
 import com.webstart.teamup.activities.money.ShopActivity;
 import com.webstart.teamup.activities.profile.ProfilActivity;
@@ -46,6 +48,10 @@ public class HomeActivity extends AppCompatActivity {
         tf.teams.getData();
         announcementFragment.getData();
         chatFragment.getData();
+
+        if((Firebase.getInstance().getUser().getPictureProfil() != null)){
+            Picasso.with(this).load(Firebase.getInstance().getUser().getPictureProfil()).into((ImageView) findViewById(R.id.home_picture));
+        }
 
         setNavBar();
     }

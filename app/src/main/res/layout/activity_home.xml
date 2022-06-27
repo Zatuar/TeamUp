@@ -25,6 +25,7 @@
             android:layout_marginRight="14dp"/>
 
         <ImageButton
+            android:id="@+id/home_picture"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_face_24"

@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.activities.HomeActivity;
+import com.webstart.teamup.activities.teams.TeamCreateActivity;
 import com.webstart.teamup.fragments.signup.Inscription1Fragment;
 import com.webstart.teamup.fragments.signup.Inscription2Fragment;
 import com.webstart.teamup.fragments.signup.Inscription3Fragment;
@@ -138,6 +139,33 @@ public class InscriptionActivity extends AppCompatActivity {
         }
     }
 
+    private void actionForImageProfil(){
+        if(selectedImageUri != null){
+            StorageReference pictureProfil = Firebase.getInstance().storage.getReference().child("pictureTeam/"+profil.getId());
+            UploadTask uploadTask = pictureProfil.putFile(selectedImageUri);
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            String uploadedImageUrl = task.getResult().toString();
+                            //Ajouter l'image de l'équipe aux données locales du User
+                            profil.setPictureProfil(uploadedImageUrl);
+                            //Ajouter l'Image dans l'equipe de Firebase
+                            Firebase.getInstance().db.collection("users").document(profil.getId()).update("profilPicture",profil.getPictureProfil());
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(InscriptionActivity.this, "Failed to Upload Image", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
     private void signUp() {
         Intent home = new Intent(this, HomeActivity.class);
         Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
@@ -170,6 +198,7 @@ public class InscriptionActivity extends AppCompatActivity {
                                                 Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getFBuser().getUid()).set(profil);
                                                 //Passer des infos du User en global
                                                 Firebase.getInstance().setUser(profil);
+                                                //transaction.remove("Page 3");
                                                 startActivity(home);
                                             }
                                         });
