@@ -75,7 +75,8 @@
             android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:backgroundTint="@color/white"
-            android:autofillHints="phone" />
+            android:autofillHints="phone"
+            android:maxLength="10" />
         <Button
             android:id="@+id/next"
             android:layout_width="300dp"

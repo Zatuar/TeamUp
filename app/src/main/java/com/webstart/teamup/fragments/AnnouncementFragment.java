@@ -89,15 +89,12 @@ public class AnnouncementFragment extends Fragment {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
                         annonces.add(gson.fromJson(datatoString, Annonce.class));
-                        Log.i("Annonce 0", ""+annonces.get(0));
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
                 }
             }
         });
-
-        Log.i("Test", "Ici");
     }
 
     private void showAnnonce(ArrayList<Annonce> annonces) {

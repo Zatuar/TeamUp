@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ import com.webstart.teamup.models.Profil;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class InscriptionActivity extends AppCompatActivity {
     int SELECT_PICTURE = 200;
@@ -77,7 +80,8 @@ public class InscriptionActivity extends AppCompatActivity {
                 EditText verifemail = findViewById(R.id.edit_email);
                 EditText verifpw = findViewById(R.id.edit_pw);
                 EditText verifphone = findViewById(R.id.edit_phone);
-                if(!(verifemail.getText().toString().equals("")||verifpw.getText().toString().equals("")||verifphone.getText().toString().equals(""))) {
+                if(!(verifemail.getText().toString().equals("") || verifpw.getText().toString().equals("")
+                        || verifphone.getText().toString().equals("") || isEmailValid(verifemail.getText().toString()))) {
                     pw = verifpw.getText().toString();
                     profil.setEmail(verifemail.getText().toString());
                     profil.setPhone(verifphone.getText().toString());
@@ -189,5 +193,13 @@ public class InscriptionActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public static boolean isEmailValid(String email){
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        boolean result = matcher.matches();
+        return result;
     }
 }
