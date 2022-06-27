@@ -27,6 +27,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.webstart.teamup.Firebase;
@@ -46,7 +48,6 @@ import java.util.regex.Pattern;
 
 public class InscriptionActivity extends AppCompatActivity {
     int SELECT_PICTURE = 200;
-
     FragmentManager manager;
     FragmentTransaction transaction;
     Profil profil = new Profil();
@@ -81,7 +82,7 @@ public class InscriptionActivity extends AppCompatActivity {
                 EditText verifpw = findViewById(R.id.edit_pw);
                 EditText verifphone = findViewById(R.id.edit_phone);
                 if(!(verifemail.getText().toString().equals("") || verifpw.getText().toString().equals("")
-                        || verifphone.getText().toString().equals("") || isEmailValid(verifemail.getText().toString()))) {
+                        || verifphone.getText().toString().equals("")) && isEmailValid(verifemail.getText().toString())) {
                     pw = verifpw.getText().toString();
                     profil.setEmail(verifemail.getText().toString());
                     profil.setPhone(verifphone.getText().toString());
@@ -195,11 +196,12 @@ public class InscriptionActivity extends AppCompatActivity {
                 });
     }
 
-    public static boolean isEmailValid(String email){
+    public boolean isEmailValid(String email){
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
-        boolean result = matcher.matches();
-        return result;
+        boolean isEmailValid = matcher.matches();
+
+        return isEmailValid;
     }
 }
