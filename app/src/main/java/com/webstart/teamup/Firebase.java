@@ -1,7 +1,10 @@
 package com.webstart.teamup;
 
+import android.graphics.Bitmap;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -53,6 +56,6 @@ public class Firebase extends AppCompatActivity {
     public ArrayList<Team> teamsUser = new ArrayList<>();
 
     public FirebaseStorage storage = FirebaseStorage.getInstance("gs://teamup-57580.appspot.com");
-    //StorageReference pictureTeam = storage.getReference().
+
 
 }

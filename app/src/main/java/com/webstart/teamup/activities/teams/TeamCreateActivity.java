@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,9 +24,13 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.R;
+import com.webstart.teamup.activities.auth.InscriptionActivity;
 import com.webstart.teamup.activities.profile.ProfilActivity;
 import com.webstart.teamup.fragments.team.TeamCreate1Fragment;
 import com.webstart.teamup.fragments.team.TeamCreate2Fragment;
@@ -50,12 +55,16 @@ public class TeamCreateActivity extends AppCompatActivity {
     TeamCreate1Fragment tc1;
     ImageButton logoTeam;
 
+    Uri selectedImageUri = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_create);
-        //ajout par défaut du User dans les joueurs de l'equipe
-        //members.add(new ProfilMin(Firebase.getInstance().getUser().getPseudo(),Firebase.getInstance().getUser().getPictureProfil(),Firebase.getInstance().getUser().getId()));
+
+        if((Firebase.getInstance().getUser().getPictureProfil() != null)){
+            Picasso.with(this).load(Firebase.getInstance().getUser().getPictureProfil()).into((ImageView) findViewById(R.id.home_picture));
+        }
         tc1 = new TeamCreate1Fragment();
         tc1.mates.add(new ProfilMin(Firebase.getInstance().getUser().getPseudo(),Firebase.getInstance().getUser().getPictureProfil(),Firebase.getInstance().getUser().getId()));
         manager = getSupportFragmentManager();
@@ -115,11 +124,7 @@ public class TeamCreateActivity extends AppCompatActivity {
             team.setName(team_name.getText().toString());
             team.setDescription(team_bio.getText().toString());
             team.setGame(game);
-            team.setMembers(tc1.mates);/*
-            if(!logoTeam.getDrawable().equals(getResources().getDrawable(R.drawable.ic_baseline_add_a_photo_24))) {
-                //team.setLogo(logoTeam.toString());
-                logoTeam.getDrawable();
-            }*/
+            team.setMembers(tc1.mates);
             transaction.replace(R.id.fragment_team_create, TeamCreate2Fragment.class, null, "Page 2");
             transaction.setReorderingAllowed(true);
             transaction.addToBackStack("Page 1");
@@ -138,9 +143,8 @@ public class TeamCreateActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-                    Log.d("Success",selectedImageUri.toString());
+                if (data.getData() != null) {
+                    selectedImageUri = data.getData();
                     logoTeam.setImageURI(selectedImageUri);
                 }
             }
@@ -193,6 +197,35 @@ public class TeamCreateActivity extends AppCompatActivity {
                 });
     }
 
+    private void actionForImageTeam(){
+        if(selectedImageUri != null){
+            StorageReference pictureProfil = Firebase.getInstance().storage.getReference().child("pictureTeam/"+team.getId());
+            UploadTask uploadTask = pictureProfil.putFile(selectedImageUri);
+
+            uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            String uploadedImageUrl = task.getResult().toString();
+                            //Ajouter l'image de l'équipe aux données locales du User
+                            team.setLogo(uploadedImageUrl);
+                            //Ajouter l'Image dans l'equipe de Firebase
+                            Firebase.getInstance().db.collection("teams").document(team.getId()).update("logo",team.getLogo());
+                            //Ajouter l'équipe à la liste local des équipes du Users
+                            Firebase.getInstance().teamsUser.add(team);
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(TeamCreateActivity.this, "Failed to Upload Image", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
     private void actionForTeam() {
         Firebase.getInstance().db.collection("teams").add(team)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -200,12 +233,11 @@ public class TeamCreateActivity extends AppCompatActivity {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("Success", "DocumentSnapshot written with ID: " + documentReference.getId());
                         team.setId(documentReference.getId());
+                        actionForImageTeam();
                         //Ajouter l'ID dans l'équipe de Firebase
                         Firebase.getInstance().db.collection("teams").document(team.getId()).update("id",team.getId());
                         //Ajouter l'ID de l'equipe aux données locales du User
                         Firebase.getInstance().getUser().getTeams().add(team.getId());
-                        //Ajouter l'équipe à la liste local des équipes du Users
-                        Firebase.getInstance().teamsUser.add(team);
                         //Ajouter l'ID de l'équipe aux données du User de Firebase
                         for (ProfilMin pm:team.getMembers()) {
                             Firebase.getInstance().db.collection("users").document(pm.getId()).update("teams",Firebase.getInstance().getUser().getTeams());
