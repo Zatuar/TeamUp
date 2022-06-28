@@ -43,6 +43,5 @@ public class ProfileEditActivity extends AppCompatActivity {
         Firebase.getInstance().getUser().setDescription(newBio);
         Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getId()).update("pseudo",newPseudo);
         Firebase.getInstance().db.collection("users").document(Firebase.getInstance().getUser().getId()).update("description",newBio);
-
     }
 }

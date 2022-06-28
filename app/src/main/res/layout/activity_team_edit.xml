@@ -78,5 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Modifier"
         android:backgroundTint="@color/dark_purple"
-        android:paddingHorizontal="30dp"/>
+        android:paddingHorizontal="30dp"
+        android:textColor="@color/white"
+        android:onClick="editTeam"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

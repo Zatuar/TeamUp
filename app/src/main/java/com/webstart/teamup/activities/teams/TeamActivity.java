@@ -56,6 +56,7 @@ public class TeamActivity extends AppCompatActivity {
 
         if (!team.getMembers().get(0).getId().equals(Firebase.getInstance().getUser().getId())){
             findViewById(R.id.see_applications).setVisibility(View.INVISIBLE);
+            findViewById(R.id.edit_btn).setVisibility(View.INVISIBLE);
         }
     }
 
