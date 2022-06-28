@@ -31,6 +31,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.activities.HomeActivity;
 import com.webstart.teamup.activities.teams.TeamCreateActivity;
@@ -39,8 +40,10 @@ import com.webstart.teamup.fragments.signup.Inscription2Fragment;
 import com.webstart.teamup.fragments.signup.Inscription3Fragment;
 import com.webstart.teamup.R;
 import com.webstart.teamup.models.Abonnement;
+import com.webstart.teamup.models.Annonce;
 import com.webstart.teamup.models.Jeu;
 import com.webstart.teamup.models.Profil;
+import com.webstart.teamup.models.Team;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,8 +85,8 @@ public class InscriptionActivity extends AppCompatActivity {
                 EditText verifemail = findViewById(R.id.edit_email);
                 EditText verifpw = findViewById(R.id.edit_pw);
                 EditText verifphone = findViewById(R.id.edit_phone);
-                if(!(verifemail.getText().toString().equals("") || verifpw.getText().toString().equals("")
-                        || verifphone.getText().toString().equals("")) && isEmailValid(verifemail.getText().toString())) {
+                if (isEmailValid(verifemail.getText().toString()) && isPasswordValid(verifpw.getText().toString())
+                    && isPhoneValid(verifphone.getText().toString())) {
                     pw = verifpw.getText().toString();
                     profil.setEmail(verifemail.getText().toString());
                     profil.setPhone(verifphone.getText().toString());
@@ -226,11 +229,37 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     public boolean isEmailValid(String email){
+        boolean isEmailValid = false;
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
-        boolean isEmailValid = matcher.matches();
+        isEmailValid = matcher.matches();
+
+        if (email.length() == 00)
+            Toast.makeText(InscriptionActivity.this, "L'email est obligatoire", Toast.LENGTH_SHORT).show();
 
         return isEmailValid;
+    }
+
+    public boolean isPhoneValid(String phone){
+        boolean isPhoneValid = false;
+        if (phone.length() > 0 && phone.length() == 10)
+            isPhoneValid = true;
+
+        if (phone.length() != 10)
+            Toast.makeText(InscriptionActivity.this, "Le numéro de téléphone doit faire au moins 10 charactères", Toast.LENGTH_SHORT).show();
+
+        return isPhoneValid;
+    }
+
+    public boolean isPasswordValid(String password){
+        boolean isPasswordValid = false;
+        if (password.length() > 0)
+            isPasswordValid = true;
+
+        if (password.length() == 00)
+            Toast.makeText(InscriptionActivity.this, "Le mot de passe est obligatoire", Toast.LENGTH_SHORT).show();
+
+        return isPasswordValid;
     }
 }
