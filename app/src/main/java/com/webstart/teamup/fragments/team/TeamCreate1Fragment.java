@@ -33,9 +33,11 @@ public class TeamCreate1Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for (int i = 0; i < 5; i++) {
-            games.add("Jeu #"+i);
-        }
+        games.add("Counter Strike : Global Offensive");
+        games.add("League Of Legends");
+        games.add("Rainbow Six: Siege");
+        games.add("Rocket League");
+        games.add("Team Fortress 2");
     }
 
     @Override
