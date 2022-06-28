@@ -88,7 +88,27 @@ public class AnnouncementFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
-                        annonces.add(gson.fromJson(datatoString, Annonce.class));
+                        Annonce annonce = gson.fromJson(datatoString, Annonce.class);
+                        Log.i("ANNONCE", ""+annonce.getTeam());
+                        if (annonce.getTeam().length() > 0){
+                            Firebase.getInstance().db.collection("teams")
+                            .whereEqualTo("id", annonce.getTeam())
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Gson gson = new Gson();
+                                            String datatoString = gson.toJson(document.getData());
+                                            Team team = gson.fromJson(datatoString, Team.class);
+                                            annonce.setTeam(team.getName());
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        annonces.add(annonce);
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
