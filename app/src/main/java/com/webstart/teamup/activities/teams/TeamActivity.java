@@ -63,4 +63,10 @@ public class TeamActivity extends AppCompatActivity {
         Intent profil = new Intent(this, ProfilActivity.class);
         startActivity(profil);
     }
+
+    public void editTeam(View view) {
+        Intent teamEditActivity = new Intent(this, TeamEditActivity.class);
+        teamEditActivity.putExtra("team", data);
+        startActivity(teamEditActivity);
+    }
 }

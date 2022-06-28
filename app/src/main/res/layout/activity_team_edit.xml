@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.teams.TeamEditActivity"
+    android:background="@color/light_purple">
+
+    <LinearLayout
+        android:id="@+id/home_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="end"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:background="@color/medium_purple">
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_notifications_24"
+            android:background="@drawable/round_button_white_borders"
+            android:layout_marginRight="14dp"/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_face_24"
+            android:background="@drawable/round_button_white_borders"
+            android:onClick="goToProfile"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/d1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/home_header"
+        android:text="@string/edit_team"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"/>
+
+    <LinearLayout
+        android:id="@+id/team_infos_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/d1"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp" >
+        <EditText
+            android:id="@+id/team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/create_team_name"
+            android:textColorHint="@color/white"
+            android:textSize="20dp"/>
+
+        <EditText
+            android:id="@+id/team_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/create_team_description"
+            android:textColorHint="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="18dp" />
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/team_infos_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Modifier"
+        android:backgroundTint="@color/dark_purple"
+        android:paddingHorizontal="30dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

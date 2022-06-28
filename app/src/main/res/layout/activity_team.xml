@@ -51,7 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:gravity="center">
             <TextView
                 android:id="@+id/team_rank"
                 android:layout_width="wrap_content"
@@ -68,6 +69,13 @@
                 android:textSize="34dp"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:src="@drawable/ic_baseline_create_24"
+                android:background="@color/light_purple"
+                android:layout_marginStart="10dp"
+                android:onClick="editTeam"/>
         </LinearLayout>
 
         <TextView
@@ -123,12 +131,6 @@
                 android:background="@drawable/border_top_white_purple_bg"
                 android:paddingTop="12dp"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Carrière"
-                    android:textColor="@color/white"
-                    android:textSize="20dp" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

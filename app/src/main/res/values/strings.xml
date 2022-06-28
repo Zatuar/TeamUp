@@ -39,6 +39,7 @@
     <string name="create_annonce">Créer une annonce</string>
     <string name="create_annonce_title_placeholder">Titre de l\'annonce</string>
     <string name="create_annonce_body_placeholder">Message de l\'annonce</string>
+    <string name="edit_team">Modification</string>
     <string name="edit">Modifier</string>
     <string name="subscriptions">Abonnements</string>
     <string name="payment">Paiement</string>
