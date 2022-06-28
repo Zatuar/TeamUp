@@ -89,7 +89,6 @@ public class AnnouncementFragment extends Fragment {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
                         Annonce annonce = gson.fromJson(datatoString, Annonce.class);
-                        Log.i("ANNONCE", ""+annonce.getTeam());
                         if (annonce.getTeam().length() > 0){
                             Firebase.getInstance().db.collection("teams")
                             .whereEqualTo("id", annonce.getTeam())
