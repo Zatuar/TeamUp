@@ -61,7 +61,6 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.Holder> 
         Holder(View itemView){
             super(itemView);
             annonce_title = itemView.findViewById(R.id.annonce_title);
-            annonce_team_logo = itemView.findViewById(R.id.annonce_team_logo);
             annonce_team_name = itemView.findViewById(R.id.annonce_team_name);
             annonce_body = itemView.findViewById(R.id.annonce_body);
         }
