@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AnnouncementActivity"
+    tools:context=".activities.teams.TeamEditActivity"
     android:background="@color/light_purple">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_notifications_24"
             android:background="@drawable/round_button_white_borders"
-            android:layout_marginEnd="14dp"/>
+            android:layout_marginRight="14dp"/>
 
         <ImageButton
             android:layout_width="40dp"
@@ -32,53 +32,51 @@
             android:onClick="goToProfile"/>
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/d1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/home_header"
+        android:text="@string/edit_team"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"/>
+
+    <LinearLayout
+        android:id="@+id/team_infos_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/d1"
+        app:layout_constraintStart_toStartOf="parent"
         android:orientation="vertical"
-        android:gravity="center"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        android:layout_marginVertical="20dp"
-        android:layout_marginHorizontal="15dp"
-        android:background="@drawable/border_rounded_white_bg_purple">
+        android:paddingVertical="10dp" >
+        <EditText
+            android:id="@+id/team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:hint="@string/create_team_name"
+            android:textColorHint="@color/white"
+            android:textSize="20dp"/>
 
-        <TextView
-            android:id="@+id/annonce_title"
+        <EditText
+            android:id="@+id/team_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
-            android:textSize="34dp"
-            android:textColor="@color/white"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_marginVertical="10dp">
-            <TextView
-                android:id="@+id/annonce_team_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Team name"
-                android:textSize="25dp"
-                android:textColor="@color/white"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/annonce_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="content"
-            android:textSize="18dp"
-            android:textColor="@color/white"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Postuler"
-            android:backgroundTint="@color/dark_purple"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/white"
+            android:hint="@string/create_team_description"
+            android:textColorHint="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="18dp" />
     </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/team_infos_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Modifier"
+        android:backgroundTint="@color/dark_purple"
+        android:paddingHorizontal="30dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

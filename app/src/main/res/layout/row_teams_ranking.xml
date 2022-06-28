@@ -56,10 +56,6 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/rocket_league" />
         </LinearLayout>
     </LinearLayout>
 
