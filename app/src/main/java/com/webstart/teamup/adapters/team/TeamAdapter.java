@@ -63,6 +63,10 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.Holder> {
         holder.team_name.setText(key.getName());
         holder.team_score.setText(""+key.getScore()+"pts");
         holder.team_rank.setText("#"+key.getRank());
+
+        if (key.getRank().equals(-1))
+            holder.team_rank.setText("#NA");
+
         if((key.getLogo() != null)){
             Picasso.with(context).load(key.getLogo()).into(holder.team_logo);
         }

@@ -49,8 +49,6 @@ public class TeamsListFragment extends Fragment {
             }
         }, getContext());
         getData();
-        Log.d("ezifvzef","azertryuiopqsdfghjklm");
-
     }
 
     @Override
@@ -85,7 +83,6 @@ public class TeamsListFragment extends Fragment {
             }
         }, getContext());
         teamsRV.setAdapter(adapter);
-        Log.d("test","pzoerugzepiuzebfi hzebz");
     }
 
     public void getData() {
