@@ -1,6 +1,7 @@
 package com.webstart.teamup.adapters.team;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
+import com.webstart.teamup.Firebase;
 import com.webstart.teamup.interfaces.ClickMemberListener;
 import com.webstart.teamup.R;
+import com.webstart.teamup.models.Profil;
 import com.webstart.teamup.models.ProfilMin;
+import com.webstart.teamup.models.Team;
 
 import java.util.ArrayList;
 
@@ -49,6 +59,9 @@ public class TeamListMemberAdapter extends RecyclerView.Adapter<TeamListMemberAd
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         final ProfilMin key = membersList.get(position);
         holder.member_name.setText(key.getName());
+        if (key.getPictureProfil() != null)
+            Picasso.with(context).load(key.getPictureProfil()).into(holder.member_photo);
+
         holder.itemView.setOnClickListener(v -> clickMemberListener.onMemberClick(key));
     }
 

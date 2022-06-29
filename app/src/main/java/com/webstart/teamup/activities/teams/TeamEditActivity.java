@@ -58,7 +58,6 @@ public class TeamEditActivity extends AppCompatActivity {
     public void editTeam(View view) {
         String newName = team_name.getText().toString();
         String newDescription = team_description.getText().toString();
-//        Firebase.getInstance().db.collection("teams").document(Firebase.getInstance().getUser().getId()).update("pseudo",newPseudo);
 
         Firebase.getInstance().db.collection("teams")
         .document(""+team.getId())

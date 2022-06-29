@@ -1,15 +1,15 @@
 package com.webstart.teamup.models;
 
 public class ProfilMin {
-    private String name, photo;
+    private String name, pictureProfil;
     private String id;
 
     public ProfilMin() {
     }
 
-    public ProfilMin(String name, String photo, String id) {
+    public ProfilMin(String name, String pictureProfil, String id) {
         this.name = name;
-        this.photo = photo;
+        this.pictureProfil = pictureProfil;
         this.id = id;
     }
 
@@ -22,12 +22,12 @@ public class ProfilMin {
         this.name = name;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPictureProfil() {
+        return pictureProfil;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPictureProfil(String photo) {
+        this.pictureProfil = photo;
     }
 
     public String getId() {
