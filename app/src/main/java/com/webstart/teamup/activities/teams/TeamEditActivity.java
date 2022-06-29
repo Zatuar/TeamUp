@@ -27,7 +27,6 @@ public class TeamEditActivity extends AppCompatActivity {
     EditText team_name, team_description;
     Team team;
 
-    Team team;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
