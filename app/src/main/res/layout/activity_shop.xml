@@ -4,6 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.money.ShopActivity">
+    tools:context=".activities.money.ShopActivity"
+    android:background="@color/light_purple">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="A venir"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="38dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
