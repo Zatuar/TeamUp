@@ -40,29 +40,21 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/edit_game"
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="12dp"
-        android:layout_gravity="center"
-        android:fontFamily="@font/sora"
-        android:inputType="textEmailAddress"
-        android:hint="@string/select_game_placeholder"
-        android:textColorHint="@color/white"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_team_game"
         android:textColor="@color/white"
+        android:textSize="20dp"/>
+    <Spinner
+        android:id="@+id/team_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        android:autofillHints="name"/>
+        android:popupBackground="@color/medium_purple"
+        android:spinnerMode="dropdown"
+        android:dropDownWidth="match_parent" />
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="300dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center"
-        android:text="@string/add"
-        android:backgroundTint="@color/light_orange"
-        android:onClick="addGame" />
     <TextView
         android:id="@+id/description2"
         android:layout_width="300dp"
@@ -86,6 +78,6 @@
         android:layout_gravity="center"
         android:text="@string/finish"
         android:backgroundTint="@color/light_orange"
-        android:onClick="goToHome"/>
+        android:onClick="goSignUp"/>
 </LinearLayout>
 </FrameLayout>

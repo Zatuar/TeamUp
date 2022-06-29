@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +44,7 @@ public class InscriptionActivity extends AppCompatActivity {
     Profil profil = new Profil();
     String pw;
     Uri selectedImageUri = null;
+    Jeu game = new Jeu();
 
     ShapeableImageView selectedImage;
     @Override
@@ -123,13 +125,6 @@ public class InscriptionActivity extends AppCompatActivity {
 
     }
 
-    public void goToHome(View view) {
-        EditText selectGame = findViewById(R.id.edit_game);
-        if(!selectGame.getText().toString().equals("")) {
-            signUp();
-        }
-    }
-
     public void selectPictureProfil(View view) {
         selectedImage = findViewById(R.id.profil);
         Intent selector = new Intent(Intent.ACTION_GET_CONTENT);
@@ -177,7 +172,11 @@ public class InscriptionActivity extends AppCompatActivity {
         }
     }
 
-    private void signUp() {
+    public void goSignUp(View view) {
+        signUp();
+    }
+
+    public void signUp() {
         Intent home = new Intent(this, HomeActivity.class);
         Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
                 .addOnCompleteListener(InscriptionActivity.this, new OnCompleteListener<AuthResult>() {
@@ -188,8 +187,14 @@ public class InscriptionActivity extends AppCompatActivity {
                             //Stocker le FireBase User
                             Firebase.getInstance().setFBuser(Firebase.getInstance().getmAuth().getCurrentUser());
                             //stocker les infos saisie du User
+
+                            Spinner team_game = findViewById(R.id.team_game);
+                            game.setName(team_game.getSelectedItem().toString());
+                            ArrayList<Jeu> games = new ArrayList<Jeu>();
+                            games.add(game);
+
                             profil.setId(Firebase.getInstance().getmAuth().getUid());
-                            profil.setGames(new ArrayList<Jeu>());
+                            profil.setGames(games);
                             profil.setAbonnements(new ArrayList<Abonnement>());
                             //profil.setPictureProfil("");
                             profil.setTeams(new ArrayList<>());
