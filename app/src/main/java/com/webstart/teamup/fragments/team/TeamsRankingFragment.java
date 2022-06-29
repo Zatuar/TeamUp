@@ -36,10 +36,19 @@ import java.util.Comparator;
 public class TeamsRankingFragment extends Fragment {
     ArrayList<Team> teams = new ArrayList<>();
     RecyclerView.Adapter<TeamAdapter.Holder> adapter;
+    RecyclerView teamsRV;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getData();
+        Log.i("zerg","zzzzzzzzzzz");
+
+        adapter= new TeamAdapter(teams,new ClickTeamListenner(){
+            @Override
+            public void onTeamClick(Team team){
+                selectedTeam(team);
+            }
+        },getContext());
+        getData();
     }
 
     @Override
@@ -51,8 +60,6 @@ public class TeamsRankingFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //teams.clear();
-        //getData();
         adapter.notifyDataSetChanged();
     }
 
@@ -63,7 +70,7 @@ public class TeamsRankingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_teams_ranking, container, false);
-        RecyclerView teamsRV = view.findViewById(R.id.rv_tr);
+        teamsRV = view.findViewById(R.id.rv_tr);
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
@@ -83,7 +90,13 @@ public class TeamsRankingFragment extends Fragment {
     }
 
     public void getData() {
-        getTeams();
+        if(teams.isEmpty()) {
+            getTeams();
+        }
+        else{
+            adapter.notifyDataSetChanged();
+            //teamsRV.setAdapter(adapter);
+        }
     }
 
     private void getTeams() {
@@ -99,6 +112,8 @@ public class TeamsRankingFragment extends Fragment {
                         Gson gson = new Gson();
                         String datatoString = gson.toJson(document.getData());
                         teams.add(gson.fromJson(datatoString, Team.class));
+                        //teamsRV.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
