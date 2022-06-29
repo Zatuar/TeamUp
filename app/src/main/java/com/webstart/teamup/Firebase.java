@@ -1,15 +1,12 @@
 package com.webstart.teamup;
 
-import android.graphics.Bitmap;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import com.webstart.teamup.models.Profil;
 import com.webstart.teamup.models.Team;

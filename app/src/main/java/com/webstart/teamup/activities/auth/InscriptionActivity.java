@@ -1,24 +1,16 @@
 package com.webstart.teamup.activities.auth;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,21 +23,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.google.gson.Gson;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.activities.HomeActivity;
-import com.webstart.teamup.activities.teams.TeamCreateActivity;
 import com.webstart.teamup.fragments.signup.Inscription1Fragment;
 import com.webstart.teamup.fragments.signup.Inscription2Fragment;
 import com.webstart.teamup.fragments.signup.Inscription3Fragment;
 import com.webstart.teamup.R;
 import com.webstart.teamup.models.Abonnement;
-import com.webstart.teamup.models.Annonce;
 import com.webstart.teamup.models.Jeu;
 import com.webstart.teamup.models.Profil;
-import com.webstart.teamup.models.Team;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +42,6 @@ public class InscriptionActivity extends AppCompatActivity {
     FragmentTransaction transaction;
     Profil profil = new Profil();
     String pw;
-    String games;
     Uri selectedImageUri = null;
 
     ShapeableImageView selectedImage;
@@ -87,13 +72,15 @@ public class InscriptionActivity extends AppCompatActivity {
                 EditText verifphone = findViewById(R.id.edit_phone);
                 if (isEmailValid(verifemail.getText().toString()) && isPasswordValid(verifpw.getText().toString())
                     && isPhoneValid(verifphone.getText().toString())) {
-                    pw = verifpw.getText().toString();
-                    profil.setEmail(verifemail.getText().toString());
-                    profil.setPhone(verifphone.getText().toString());
-                    transaction.replace(R.id.fragment_inscription, Inscription2Fragment.class, null, "Page 2");
-                    transaction.setReorderingAllowed(true);
-                    transaction.addToBackStack("Page 1");
-                    transaction.commit();
+                    if(nonExistanceEmail(verifemail.getText().toString())) {
+                        pw = verifpw.getText().toString();
+                        profil.setEmail(verifemail.getText().toString());
+                        profil.setPhone(verifphone.getText().toString());
+                        transaction.replace(R.id.fragment_inscription, Inscription2Fragment.class, null, "Page 2");
+                        transaction.setReorderingAllowed(true);
+                        transaction.addToBackStack("Page 1");
+                        transaction.commit();
+                    }
                 }
                 break;
             case "3" :
@@ -111,7 +98,28 @@ public class InscriptionActivity extends AppCompatActivity {
         }
     }
 
-    public void addGame(){
+    boolean result= true;
+    private boolean nonExistanceEmail(String s) {
+        Firebase.getInstance().db.collection("users")
+                .whereGreaterThan("email", s)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            result= false;
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                result = false;
+                            }
+                        } else {
+                            Log.d("Error", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        return result;
+    }
+
+    public void addGame(View view){
 
     }
 
@@ -136,7 +144,6 @@ public class InscriptionActivity extends AppCompatActivity {
                 if (data.getData() != null) {
                     selectedImageUri = data.getData();
                     selectedImage.setImageURI(selectedImageUri);
-                    //profil.setPictureProfil(selectedImageUri.getLastPathSegment());
                 }
             }
         }
@@ -169,6 +176,7 @@ public class InscriptionActivity extends AppCompatActivity {
             });
         }
     }
+
     private void signUp() {
         Intent home = new Intent(this, HomeActivity.class);
         Firebase.getInstance().getmAuth().createUserWithEmailAndPassword(profil.getEmail(), pw)
@@ -242,24 +250,20 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     public boolean isPhoneValid(String phone){
-        boolean isPhoneValid = false;
-        if (phone.length() > 0 && phone.length() == 10)
-            isPhoneValid = true;
-
-        if (phone.length() != 10)
-            Toast.makeText(InscriptionActivity.this, "Le numéro de téléphone doit faire au moins 10 charactères", Toast.LENGTH_SHORT).show();
-
-        return isPhoneValid;
+        if (phone.length() == 10)
+            return true;
+            Toast.makeText(InscriptionActivity.this, "Le numéro de téléphone doit avoir 10 chiffres", Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     public boolean isPasswordValid(String password){
-        boolean isPasswordValid = false;
-        if (password.length() > 0)
-            isPasswordValid = true;
-
-        if (password.length() == 00)
+        if (password.length() > 5)
+            return true;
+        if (password.length()>0)
+            Toast.makeText(InscriptionActivity.this, "Le mot de passe est trop court", Toast.LENGTH_SHORT).show();
+        if (password.length() == 0)
             Toast.makeText(InscriptionActivity.this, "Le mot de passe est obligatoire", Toast.LENGTH_SHORT).show();
 
-        return isPasswordValid;
+        return false;
     }
 }

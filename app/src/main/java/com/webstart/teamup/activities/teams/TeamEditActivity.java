@@ -9,12 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.webstart.teamup.Firebase;
 import com.webstart.teamup.R;
 import com.webstart.teamup.activities.profile.ProfilActivity;
@@ -25,11 +27,17 @@ public class TeamEditActivity extends AppCompatActivity {
     EditText team_name, team_description;
     Team team;
 
+    Team team;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_edit);
         data = getIntent().getStringExtra("team");
+
+        if((Firebase.getInstance().getUser().getPictureProfil() != null)){
+            Picasso.with(this).load(Firebase.getInstance().getUser().getPictureProfil()).into((ImageView) findViewById(R.id.home_picture));
+        }
+
         printTeam();
     }
 

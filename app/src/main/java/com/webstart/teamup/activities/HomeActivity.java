@@ -30,7 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
     Drawable white;
     Drawable orange;
-    TeamsFragment tf = TeamsFragment.newInstance();
+    TeamsFragment tf = new TeamsFragment();
     AnnouncementFragment announcementFragment = AnnouncementFragment.newInstance();
     TournamentFragment tournamentFragment = new TournamentFragment();
     ChatFragment chatFragment = new ChatFragment();
@@ -44,8 +44,8 @@ public class HomeActivity extends AppCompatActivity {
         white = getDrawable(R.drawable.bottom_border_white);
         orange = getDrawable(R.drawable.bottom_border_light_orange_bg_light_purple);
         menu = findViewById(R.id.home_menu);
-        tf.ranking.getData();
-        tf.teams.getData();
+        //tf.ranking.getData();
+        //tf.teams.getData();
         announcementFragment.getData();
         chatFragment.getData();
 
@@ -55,7 +55,6 @@ public class HomeActivity extends AppCompatActivity {
 
         setNavBar();
     }
-
     private void setNavBar() {
         menu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -113,14 +112,16 @@ public class HomeActivity extends AppCompatActivity {
         TextView ranking = findViewById(R.id.ranking);
         myteam.setBackground(white);
         ranking.setBackground(orange);
-        getSupportFragmentManager().beginTransaction().replace(R.id.team_content, tf.ranking).commit();
+        tf.getChildFragmentManager().beginTransaction().replace(R.id.team_content, tf.ranking).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.team_content, tf.ranking).commit();
     }
     public void listMyTeams(View view) {
         TextView myteam = findViewById(R.id.my_teams);
         TextView ranking = findViewById(R.id.ranking);
         myteam.setBackground(orange);
         ranking.setBackground(white);
-        getSupportFragmentManager().beginTransaction().replace(R.id.team_content,tf.teams).commit();
+        tf.getChildFragmentManager().beginTransaction().replace(R.id.team_content, tf.teams).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.team_content,tf.teams).commit();
     }
     //ShopFragment
     public void goToSponsored(View view) {

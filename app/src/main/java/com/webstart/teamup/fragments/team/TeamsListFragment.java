@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class TeamsListFragment extends Fragment {
     ArrayList<Team> teams = new ArrayList<>();
     RecyclerView.Adapter<TeamAdapter.Holder> adapter;
+    RecyclerView teamsRV;
 
     public static TeamsListFragment newInstance() {
         return new TeamsListFragment();
@@ -41,6 +42,14 @@ public class TeamsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new TeamAdapter(Firebase.getInstance().teamsUser, new ClickTeamListenner() {
+            @Override
+            public void onTeamClick(Team team) {
+                selectedTeam(team);
+            }
+        }, getContext());
+        getData();
+        Log.d("ezifvzef","azertryuiopqsdfghjklm");
 
     }
 
@@ -65,7 +74,7 @@ public class TeamsListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView teamsRV = view.findViewById(R.id.rv_tl);
+        teamsRV = view.findViewById(R.id.rv_tl);
         teamsRV.setHasFixedSize(true);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(view.getContext());
         teamsRV.setLayoutManager(manager);
@@ -76,28 +85,42 @@ public class TeamsListFragment extends Fragment {
             }
         }, getContext());
         teamsRV.setAdapter(adapter);
+        Log.d("test","pzoerugzepiuzebfi hzebz");
     }
 
     public void getData() {
         Log.d("TeamsName", " => " + Firebase.getInstance().getUser().getTeams());
         if(!Firebase.getInstance().getUser().getTeams().isEmpty()) {
-            getTeamsUser();
+            if(Firebase.getInstance().teamsUser.isEmpty()) {
+                getTeamsUser();
+            }
+            else{
+                adapter.notifyDataSetChanged();
+                //teamsRV.setAdapter(adapter);
+            }
         }
     }
 
     private void getTeamsUser() {
         Firebase.getInstance().db.collection("teams")
-        .whereIn("id", Firebase.getInstance().getUser().getTeams())
-        .get()
-        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        //transformation de la map en json pour récupérer les infos du user
-                        Gson gson = new Gson();
-                        String datatoString = gson.toJson(document.getData());
-                        Firebase.getInstance().teamsUser.add(gson.fromJson(datatoString, Team.class));
+                .whereIn("id", Firebase.getInstance().getUser().getTeams())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //transformation de la map en json pour récupérer les infos du user
+                                Gson gson = new Gson();
+                                String datatoString = gson.toJson(document.getData());
+                                Firebase.getInstance().teamsUser.add(gson.fromJson(datatoString, Team.class));
+
+                                teamsRV.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                            }
+                        } else {
+                            Log.d("Error", "Error getting documents: ", task.getException());
+                        }
                     }
                 } else {
                     Log.d("Error", "Error getting documents: ", task.getException());
